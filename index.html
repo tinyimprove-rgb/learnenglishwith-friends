@@ -3,342 +3,1350 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Friends — All Seasons</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<title>English with Friends — The One with the WENUS</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
 
   :root {
-    --blue: #1D4ED8;
-    --blue-hover: #1E40AF;
-    --gray: #6B7280;
-    --light: #F9FAFB;
-    --border: #E5E7EB;
-    --text: #111827;
+    --bg: #F7F9FC;
+    --surface: #FFFFFF;
+    --surface2: #EEF2F8;
+    --border: #DDE3ED;
+    --text: #0A0F1E;
+    --text-muted: #6B7A99;
+    --accent: #1A56DB;
+    --accent-light: #EBF1FF;
+    --accent-mid: #3D6FE8;
+    --black: #0A0F1E;
+    --white: #FFFFFF;
+    --tag-slang: #0A0F1E;
+    --tag-phrase: #1A56DB;
+    --tag-vocab: #2D4A8A;
+    --tag-idiom: #0D3B6E;
+    --tag-humor: #1A3A6B;
+    --tag-phrasal: #0E4DA4;
+    --tag-expression: #1E5799;
+    --tag-romantic: #12336B;
+    --tag-business: #0A2240;
   }
 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
-    background: #fff;
-    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
     color: var(--text);
     min-height: 100vh;
-    padding: 64px 32px 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-weight: 400;
   }
 
   /* ── HEADER ── */
   .header {
-    text-align: center;
-    margin-bottom: 48px;
-    animation: rise 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    background: var(--black);
+    padding: 40px 48px 36px;
+    position: relative;
+    overflow: hidden;
   }
-
-  .title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(4.5rem, 14vw, 10rem);
-    letter-spacing: 0.04em;
-    line-height: 1;
-    color: var(--text);
-  }
-
-  .title span { color: var(--blue); }
-
-  .meta {
-    margin-top: 12px;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gray);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .meta-dot {
-    width: 3px; height: 3px;
+  .header::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: -60px;
+    width: 320px;
+    height: 320px;
     border-radius: 50%;
-    background: var(--border);
+    background: var(--accent);
+    opacity: 0.08;
+    pointer-events: none;
   }
-
-  .rule {
-    width: 40px; height: 2px;
-    background: var(--blue);
-    margin: 16px auto 0;
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    text-align: center;
   }
-
-  /* ── SEASON TABS ── */
-  .tabs-wrap {
-    width: 100%;
-    max-width: 860px;
-    margin-bottom: 36px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    animation: rise 0.6s ease 0.2s both;
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
   }
-  .tabs-wrap::-webkit-scrollbar { display: none; }
-
-  .tabs {
-    display: flex;
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.6rem;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+  .header h1 em {
+    font-style: normal;
+    color: #7BAAF7;
+  }
+  .header-sub {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+  }
+  .episode-chip {
+    display: inline-flex;
+    align-items: center;
     gap: 6px;
-    width: max-content;
-    min-width: 100%;
-    justify-content: center;
-    padding-bottom: 4px;
-  }
-
-  .tab {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 8px 16px;
-    border-radius: 100px;
-    border: 1.5px solid var(--border);
-    background: #fff;
-    color: var(--gray);
-    cursor: pointer;
-    transition: all 0.18s ease;
-    white-space: nowrap;
-  }
-
-  .tab:hover {
-    border-color: var(--blue);
-    color: var(--blue);
-  }
-
-  .tab.active {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: #fff;
-  }
-
-  /* ── SEASON INFO BAR ── */
-  .season-bar {
-    width: 100%;
-    max-width: 860px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    animation: rise 0.4s ease both;
-  }
-
-  .season-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 0.05em;
-    color: var(--text);
-  }
-
-  .ep-count-badge {
+    background: rgba(26,86,219,0.2);
+    border: 1px solid rgba(26,86,219,0.4);
+    color: #93B4FF;
+    font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gray);
-    background: var(--light);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 4px 14px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    letter-spacing: 1.5px;
+    margin-top: 16px;
   }
 
-  /* ── GRID ── */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 10px;
-    max-width: 860px;
-    width: 100%;
-  }
-
-  /* ── CARD ── */
-  .ep-card {
-    text-decoration: none;
+  /* ── TABS ── */
+  .tabs {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding: 20px 10px 16px;
-    border-radius: 12px;
-    border: 1.5px solid var(--border);
-    background: #fff;
-    cursor: pointer;
-    transition:
-      background 0.18s ease,
-      border-color 0.18s ease,
-      transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
-      box-shadow 0.18s ease;
-    opacity: 0;
-    animation: cardIn 0.35s ease both;
+    gap: 0;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
-
-  .ep-card:hover {
-    background: var(--blue);
-    border-color: var(--blue);
-    transform: translateY(-4px);
-    box-shadow: 0 10px 24px rgba(29,78,216,0.18);
-  }
-
-  .ep-card:active {
-    transform: translateY(-1px);
-  }
-
-  .ep-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.9rem;
-    letter-spacing: 0.04em;
-    color: var(--text);
-    line-height: 1;
-    transition: color 0.18s ease;
-  }
-
-  .ep-card:hover .ep-num { color: #fff; }
-
-  .ep-tag {
-    font-size: 0.57rem;
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 16px 20px;
+    border: none;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
     font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-top: 5px;
-    transition: color 0.18s ease;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    letter-spacing: 0.2px;
+    transition: color 0.15s;
   }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn:hover:not(.active) { color: var(--text); }
 
-  .ep-card:hover .ep-tag { color: rgba(255,255,255,0.7); }
-
-  /* ── FOOTER ── */
-  .footer {
-    margin-top: 56px;
-    font-size: 0.62rem;
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--border);
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  /* ── CONTENT ── */
+  .content { max-width: 900px; margin: 0 auto; padding: 40px 48px; }
+  .section { display: none; }
+  .section.active { display: block; }
 
   /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .header { padding: 28px 20px 24px; }
+    .header h1 { font-size: 2rem; }
+    .content { padding: 24px 16px; }
+    .tabs { padding: 0 8px; justify-content: flex-start; }
+    .tab-btn { padding: 13px 14px; font-size: 0.78rem; }
+    .section-title { font-size: 1.5rem; }
+    .vocab-grid { grid-template-columns: 1fr; }
+    .dialogue-line { grid-template-columns: 68px 1fr; gap: 8px; }
+    .quiz-options { grid-template-columns: 1fr; }
+    .quiz-card { padding: 20px; }
+    .home-episodes { grid-template-columns: 1fr; }
+    .home-hero-title { font-size: 2rem; }
+    .home-stats { grid-template-columns: repeat(2, 1fr); }
+    .home-features { grid-template-columns: 1fr; }
+  }
   @media (max-width: 480px) {
-    body { padding: 44px 14px 64px; }
-    .grid { grid-template-columns: repeat(4, 1fr); gap: 7px; }
-    .ep-num { font-size: 1.5rem; }
-    .tabs { justify-content: flex-start; }
+    .header h1 { font-size: 1.6rem; }
+    .header-eyebrow { font-size: 0.6rem; }
+    .tab-btn { padding: 12px 10px; font-size: 0.72rem; letter-spacing: 0; }
+    .filter-btn { padding: 5px 10px; font-size: 0.65rem; }
+    .dialogue-line { grid-template-columns: 58px 1fr; }
+    .speaker-label { font-size: 0.58rem; padding: 4px 5px; }
+    .tooltip { width: 170px; font-size: 0.73rem; }
+    .score-num { font-size: 3.5rem; }
+    .home-hero-title { font-size: 1.5rem; }
+    .home-stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+
+  .section-header { margin-bottom: 32px; }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .section-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 28px; }
+  .filter-btn {
+    padding: 6px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    background: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+  /* ── VOCAB CARDS ── */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .vocab-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .vocab-card:hover { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+  .vocab-card.revealed { border-color: var(--accent); }
+
+  .card-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    background: var(--surface2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .vocab-card.revealed .card-tag { background: var(--accent-light); color: var(--accent); border-color: rgba(26,86,219,0.2); }
+
+  .vocab-word {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 3px;
+    line-height: 1.2;
+  }
+  .vocab-phonetic {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .vocab-context {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 8px 10px;
+    border-left: 2.5px solid var(--accent);
+    background: var(--accent-light);
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .vocab-reveal-hint {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 1.5px;
+    color: var(--border);
+    text-transform: uppercase;
+    margin-top: 6px;
+    transition: color 0.2s;
+  }
+  .vocab-card:hover .vocab-reveal-hint { color: var(--accent); }
+  .vocab-card.revealed .vocab-reveal-hint { display: none; }
+
+  .vocab-meaning {
+    display: none;
+    font-size: 0.875rem;
+    color: var(--text);
+    line-height: 1.65;
+    background: var(--surface2);
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+  .vocab-meaning .example {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-style: italic;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .vocab-card.revealed .vocab-meaning { display: block; }
+
+  /* ── DIALOGUE ── */
+  .dialogue-line {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .speaker-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 8px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 4px;
+    color: white;
+    font-weight: 500;
+  }
+  .speaker-Monica { background: #1A56DB; }
+  .speaker-Chandler { background: #0A0F1E; }
+  .speaker-Rachel { background: #2D4A8A; }
+  .speaker-Joey { background: #0D3B6E; }
+  .speaker-Ross { background: #1E3A6B; }
+  .speaker-Phoebe { background: #0E4DA4; }
+  .speaker-Steve { background: #374151; }
+
+  .dialogue-text {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+  .highlight-word {
+    background: var(--accent-light);
+    border-bottom: 2px solid var(--accent);
+    cursor: pointer;
+    padding: 0 2px;
+    border-radius: 2px;
+    position: relative;
+    transition: background 0.15s;
+  }
+  .highlight-word:hover { background: rgba(26,86,219,0.15); }
+  .tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--black);
+    color: var(--white);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.77rem;
+    width: 210px;
+    line-height: 1.55;
+    z-index: 200;
+    pointer-events: none;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--black);
+  }
+  .highlight-word:hover .tooltip { display: block; }
+
+  /* ── QUIZ ── */
+  .quiz-container { max-width: 580px; }
+  .quiz-stats {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .progress-wrap {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .quiz-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    animation: fadeUp 0.25s ease;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .quiz-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .quiz-question {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .quiz-excerpt {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.83rem;
+    padding: 10px 14px;
+    background: var(--surface2);
+    border-left: 2.5px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  @media (max-width: 500px) { .quiz-options { grid-template-columns: 1fr; } }
+  .quiz-option {
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--white);
+    cursor: pointer;
+    font-size: 0.87rem;
+    color: var(--text);
+    text-align: left;
+    transition: all 0.15s;
+    line-height: 1.4;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .quiz-option:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+  .quiz-option.correct { border-color: #166534; background: #F0FDF4; color: #166534; }
+  .quiz-option.wrong { border-color: #991B1B; background: #FEF2F2; color: #991B1B; }
+  .quiz-option:disabled { cursor: default; }
+
+  .fill-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    margin-bottom: 10px;
+    transition: border-color 0.15s;
+  }
+  .fill-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+  .fill-input.correct { border-color: #166534; background: #F0FDF4; }
+  .fill-input.wrong { border-color: #991B1B; background: #FEF2F2; }
+
+  .quiz-feedback {
+    display: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.87rem;
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
+  .quiz-feedback.wrong-fb { background: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 22px;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.87rem;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: #1447BF; }
+  .btn-secondary { background: var(--surface2); color: var(--text); border: 1.5px solid var(--border); }
+  .btn-secondary:hover { background: var(--border); }
+  .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .quiz-score {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .score-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 5rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .score-denom { font-size: 1.8rem; color: var(--text-muted); }
+  .score-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 8px 0 20px;
+  }
+  .score-msg {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--text);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  /* ── CULTURE ── */
+  .culture-grid { display: grid; gap: 12px; }
+  .culture-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 16px;
+    align-items: start;
+    transition: border-color 0.15s;
+  }
+  .culture-card:hover { border-color: var(--accent); }
+  .culture-emoji {
+    width: 44px;
+    height: 44px;
+    background: var(--surface2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .culture-card h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .culture-card p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .hidden { display: none !important; }
+
+  /* ── HOME PAGE ── */
+  .home-hero {
+    background: var(--black);
+    border-radius: 16px;
+    padding: 48px 40px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .home-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(26,86,219,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .home-hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .home-hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.6rem;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .home-hero-title em { font-style: normal; color: #7BAAF7; }
+  .home-hero-desc {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 28px;
+  }
+  .home-hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+    text-decoration: none;
+  }
+  .home-hero-btn:hover { background: #1447BF; transform: translateY(-1px); }
+
+  .home-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .home-stat {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: border-color 0.15s;
+  }
+  .home-stat:hover { border-color: var(--accent); }
+  .home-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .home-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .home-section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+
+  .home-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .home-feature {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .home-feature:hover { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+  .home-feature-icon { font-size: 1.6rem; margin-bottom: 10px; }
+  .home-feature-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .home-feature-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .home-episodes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .episode-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .episode-card:hover { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+  .episode-card.active-ep { border-color: var(--accent); background: var(--accent-light); }
+  .ep-badge {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: var(--surface2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.3;
+  }
+  .episode-card.active-ep .ep-badge { background: var(--accent); color: white; }
+  .ep-info { flex: 1; min-width: 0; }
+  .ep-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ep-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+  .ep-arrow { color: var(--text-muted); font-size: 0.8rem; flex-shrink: 0; }
+  .episode-card.active-ep .ep-arrow { color: var(--accent); }
+  .coming-soon-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    padding: 2px 7px;
+    background: var(--surface2);
+    border-radius: 4px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    font-size: 1rem;
+  }
+  .search-input {
+    width: 100%;
+    padding: 11px 40px 11px 40px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+  }
+  .search-input::placeholder { color: var(--text-muted); }
+  .search-clear {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1;
+    padding: 2px;
+    display: none;
+    border-radius: 50%;
+    transition: color 0.15s;
+  }
+  .search-clear:hover { color: var(--text); }
+  .search-clear.visible { display: block; }
+  .search-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    min-height: 18px;
+  }
+  .search-count span { color: var(--accent); font-weight: 500; }
+  .search-highlight {
+    background: rgba(26,86,219,0.15);
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+  .no-results {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-muted);
+    display: none;
+  }
+  .no-results.show { display: block; }
+  .no-results-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .no-results p { font-size: 0.9rem; line-height: 1.6; }
+  .no-results strong { color: var(--text); }
+
+  /* divider */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
   }
 </style>
 </head>
 <body>
 
-  <header class="header">
-    <div class="title">FRIE<span>N</span>DS</div>
-    <div class="meta">
-      <span>Complete Series</span>
-      <span class="meta-dot"></span>
-      <span>10 Seasons</span>
-      <span class="meta-dot"></span>
-      <span>NBC · 1994–2004</span>
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">Interactive Language Lesson</div>
+    <a href="https://tinyimprove-rgb.github.io/learnenglishwith-friends/" style="text-decoration:none">
+      <h1>English with <em>Friends</em></h1>
+    </a>
+    <div class="header-sub">Vocabulary · Slang · Grammar · Culture</div>
+    <div class="episode-chip">S01 · The One with the WENUS · All Vocab & Slang</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <a class="tab-btn" href="https://tinyimprove-rgb.github.io/learnenglishwith-friends/" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;">🏠 Home</a>
+  <button class="tab-btn active" onclick="showSection('vocab')">📖 Vocab & Slang</button>
+  <button class="tab-btn" onclick="showSection('dialogue')">💬 Annotated Script</button>
+  <button class="tab-btn" onclick="showSection('quiz')">🎯 Quiz Me</button>
+  <button class="tab-btn" onclick="showSection('culture')">🌎 Culture Notes</button>
+</div>
+
+<div class="content">
+
+  <!-- HOME -->
+  <div id="home" class="section">
+    <div class="home-hero">
+      <div class="home-hero-eyebrow">Learn English with TV · Season 1</div>
+      <div class="home-hero-title">English with <em>Friends</em></div>
+      <p class="home-hero-desc">Master real American English through the show you love. Every episode turned into vocabulary cards, annotated scripts, quizzes, and culture notes.</p>
+      <button class="home-hero-btn" onclick="showSection('vocab')">📖 Start Learning →</button>
     </div>
-    <div class="rule"></div>
-  </header>
 
-  <div class="tabs-wrap">
-    <div class="tabs" id="tabs"></div>
+    <div class="home-stats">
+      <div class="home-stat"><div class="home-stat-num">50+</div><div class="home-stat-label">Vocab Cards</div></div>
+      <div class="home-stat"><div class="home-stat-num">35</div><div class="home-stat-label">Dialogue Lines</div></div>
+      <div class="home-stat"><div class="home-stat-num">12</div><div class="home-stat-label">Quiz Questions</div></div>
+      <div class="home-stat"><div class="home-stat-num">8</div><div class="home-stat-label">Culture Notes</div></div>
+    </div>
+
+    <div class="home-section-title">What's inside</div>
+    <div class="home-features">
+      <div class="home-feature" onclick="showSection('vocab')">
+        <div class="home-feature-icon">📖</div>
+        <div class="home-feature-title">Vocabulary & Slang</div>
+        <div class="home-feature-desc">50+ cards covering every word, idiom, phrasal verb, and joke. Tap to reveal meaning + your own example sentence.</div>
+      </div>
+      <div class="home-feature" onclick="showSection('dialogue')">
+        <div class="home-feature-icon">💬</div>
+        <div class="home-feature-title">Annotated Script</div>
+        <div class="home-feature-desc">Key lines from the episode with hover tooltips. Understand what's really being said — including the jokes.</div>
+      </div>
+      <div class="home-feature" onclick="showSection('quiz')">
+        <div class="home-feature-icon">🎯</div>
+        <div class="home-feature-title">Quiz Yourself</div>
+        <div class="home-feature-desc">Multiple choice and fill-in-the-blank questions to test your memory. Score tracked. Shuffle on every attempt.</div>
+      </div>
+      <div class="home-feature" onclick="showSection('culture')">
+        <div class="home-feature-icon">🌎</div>
+        <div class="home-feature-title">Culture Notes</div>
+        <div class="home-feature-desc">MLK, Cheech & Chong, James Michener — understand every cultural reference the show makes.</div>
+      </div>
+    </div>
+
+    <div class="home-section-title" style="margin-top:8px">Season 1 Episodes</div>
+    <div class="home-episodes">
+      <div class="episode-card active-ep" onclick="showSection('vocab')">
+        <div class="ep-badge">S01<br>E15</div>
+        <div class="ep-info">
+          <div class="ep-title">The One with the WENUS</div>
+          <div class="ep-meta">50+ words · Available now</div>
+        </div>
+        <div class="ep-arrow">▶</div>
+      </div>
+      <div class="episode-card" style="opacity:0.6;cursor:default">
+        <div class="ep-badge">S01<br>E01</div>
+        <div class="ep-info">
+          <div class="ep-title">The One Where Monica Gets a Roommate</div>
+          <div class="ep-meta"><span class="coming-soon-badge">Coming soon</span></div>
+        </div>
+        <div class="ep-arrow">→</div>
+      </div>
+      <div class="episode-card" style="opacity:0.6;cursor:default">
+        <div class="ep-badge">S01<br>E06</div>
+        <div class="ep-info">
+          <div class="ep-title">The One with the Butt</div>
+          <div class="ep-meta"><span class="coming-soon-badge">Coming soon</span></div>
+        </div>
+        <div class="ep-arrow">→</div>
+      </div>
+      <div class="episode-card" style="opacity:0.6;cursor:default">
+        <div class="ep-badge">S01<br>E24</div>
+        <div class="ep-info">
+          <div class="ep-title">The One Where Rachel Finds Out</div>
+          <div class="ep-meta"><span class="coming-soon-badge">Coming soon</span></div>
+        </div>
+        <div class="ep-arrow">→</div>
+      </div>
+    </div>
   </div>
 
-  <div class="season-bar">
-    <span class="season-label" id="season-label">Season 1</span>
-    <span class="ep-count-badge" id="ep-count">24 Episodes</span>
+  <div id="vocab" class="section active">
+    <div class="section-header">
+      <h2 class="section-title">Vocabulary & Slang</h2>
+      <p class="section-subtitle">Every key word, phrase, slang, and joke from this episode. Tap any card to reveal the full meaning + a new example sentence you can use yourself.</p>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search words, meanings, examples..." oninput="searchVocab(this.value)">
+      <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="search-count" id="searchCount"></div>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-tag="all" onclick="filterVocab('all', this)">All</button>
+      <button class="filter-btn" data-tag="slang" onclick="filterVocab('slang', this)">🔥 Slang</button>
+      <button class="filter-btn" data-tag="phrase" onclick="filterVocab('phrase', this)">💬 Phrases</button>
+      <button class="filter-btn" data-tag="idiom" onclick="filterVocab('idiom', this)">🎭 Idioms</button>
+      <button class="filter-btn" data-tag="vocab" onclick="filterVocab('vocab', this)">📚 Vocabulary</button>
+      <button class="filter-btn" data-tag="humor" onclick="filterVocab('humor', this)">😂 Comedy</button>
+      <button class="filter-btn" data-tag="phrasal" onclick="filterVocab('phrasal', this)">🔗 Phrasal Verbs</button>
+      <button class="filter-btn" data-tag="expression" onclick="filterVocab('expression', this)">💡 Expressions</button>
+      <button class="filter-btn" data-tag="romantic" onclick="filterVocab('romantic', this)">❤️ Romantic</button>
+      <button class="filter-btn" data-tag="business" onclick="filterVocab('business', this)">💼 Business</button>
+    </div>
+    <div class="vocab-grid" id="vocabGrid"></div>
+    <div class="no-results" id="noResults">
+      <div class="no-results-icon">🔎</div>
+      <p>No results for <strong id="noResultsQuery"></strong><br>Try a different word or clear the search.</p>
+    </div>
   </div>
 
-  <div class="grid" id="grid"></div>
+  <div id="dialogue" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Annotated Script</h2>
+      <p class="section-subtitle">Key lines from the episode with <span style="background:var(--accent-light);border-bottom:2px solid var(--accent);padding:0 3px;border-radius:2px">highlighted words</span>. Hover the highlights to see definitions.</p>
+    </div>
+    <div id="dialogueLines"></div>
+  </div>
 
-  <p class="footer">Select an episode to watch</p>
+  <div id="quiz" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Quiz Yourself</h2>
+      <p class="section-subtitle">Test your knowledge of every vocab item from this episode. Multiple choice and fill-in-the-blank.</p>
+    </div>
+    <div class="quiz-container" id="quizContainer"></div>
+  </div>
+
+  <div id="culture" class="section">
+    <div class="section-header">
+      <h2 class="section-title">Culture Notes</h2>
+      <p class="section-subtitle">Understanding the American culture, comedy, and references inside this episode.</p>
+    </div>
+    <div class="culture-grid" id="cultureNotes"></div>
+  </div>
+
+</div>
 
 <script>
-  const seasons = [
-    { n: 1,  eps: 24 },
-    { n: 2,  eps: 24 },
-    { n: 3,  eps: 25 },
-    { n: 4,  eps: 24 },
-    { n: 5,  eps: 24 },
-    { n: 6,  eps: 25 },
-    { n: 7,  eps: 24 },
-    { n: 8,  eps: 24 },
-    { n: 9,  eps: 24 },
-    { n: 10, eps: 18 },
-  ];
+const vocabData = [
+  { word: "swizzel stick", phonetic: "/ˈswɪzəl stɪk/", tag: "vocab", context: '"why does my swizzel stick have an eraser?"', meaning: "A small decorative stick used to stir cocktails or drinks. Monica finds a pencil in her coffee instead — Rachel mixed them up.", example: "The bartender placed a swizzel stick in my mojito." },
+  { word: "temp job", phonetic: "/tɛmp dʒɒb/", tag: "phrase", context: '"This was supposed to be a temp job!"', meaning: "A temporary job — one you plan to leave soon. Chandler took his job thinking it was short-term, but stayed 5 years without noticing.", example: "I took a temp job at the bookstore while I looked for something better." },
+  { word: "processing supervisor", phonetic: "/ˈprəʊsɛsɪŋ ˌsuːpəˈvaɪzər/", tag: "vocab", context: '"big Al calls me into his office and tells me he wants to make me processing supervisor"', meaning: "A management position overseeing data processing operations. Getting this offer should be exciting, but Chandler sees it as being 'trapped' in a career he never chose.", example: "After three years, she was promoted to processing supervisor." },
+  { word: "WENUS", phonetic: "/ˈwiːnəs/", tag: "humor", context: '"I just don\'t want to be worrying about the WENUS."', meaning: "Weekly Estimated Net Usage Systems — a made-up corporate acronym. The joke is that it sounds like 'Venus' or a rude word, and nobody knows what it means.", example: "This is pure Friends comedy — the WENUS is a classic example of absurd corporate jargon." },
+  { word: "eclectic", phonetic: "/ɪˈklɛktɪk/", tag: "vocab", context: '"he wants to do some eclectic food"', meaning: "Selecting or using elements from a variety of sources or styles. When describing food, it means mixing cuisines or styles creatively.", example: "The restaurant had an eclectic menu — Thai, Italian, and Mexican all in one place." },
+  { word: "career counselor", phonetic: "/kəˈrɪər ˈkaʊnsələr/", tag: "vocab", context: '"I have an appointment to see Dr. Robert Pillman, career counselor a-gogo"', meaning: "A professional who helps people figure out what work they want to do. Chandler adds 'a-gogo' humorously.", example: "She visited a career counselor after graduating and couldn't decide what to do." },
+  { word: "a-gogo", phonetic: "/əˈɡəʊɡəʊ/", tag: "humor", context: '"career counselor a-gogo... I added the a-gogo"', meaning: "A playful suffix, originally from French, meaning 'in abundance' or 'galore.' Used sarcastically to make something sound hilariously grander than it is.", example: "He called it a 'job fair a-gogo' — there were booths everywhere." },
+  { word: "the lesser-known 'I don't have a dream' speech", phonetic: "", tag: "humor", context: '"Ah, the lesser-known I don\'t have a dream speech."', meaning: "A joke by Ross. It refers to Martin Luther King Jr.'s famous 'I Have a Dream' speech. Ross sarcastically calls Chandler's negative version the 'lesser-known' one.", example: "Cultural reference humor: knowing the original makes the joke much funnier." },
+  { word: "audition", phonetic: "/ɔːˈdɪʃən/", tag: "vocab", context: '"I\'m cooking dinner for him Monday night — kind of like an audition"', meaning: "A trial performance to demonstrate your skills. Here Monica uses it metaphorically — her dinner IS her job interview.", example: "The chef cooked a tasting menu as her audition for the head chef position." },
+  { word: "amuse-bouche", phonetic: "/æˌmjuːz ˈbuːʃ/", tag: "vocab", context: '"The French call it an amuse-bouche."', meaning: "French culinary term: a tiny, one-bite appetizer served before a meal to 'amuse the mouth.' Chandler makes a pun: 'It is amouz-ing' (amusing).", example: "The fine dining restaurant served an amuse-bouche of foie gras on a tiny spoon." },
+  { word: "amateur status", phonetic: "", tag: "idiom", context: '"I\'ve sort of been maintaining my amateur status so I can waitress in the Olympics"', meaning: "Rachel sarcastically uses sports terminology (amateur status in the Olympics) to mock Monica calling Wendy a 'professional' waitress. Sharp, witty sarcasm.", example: "Understanding this joke requires knowing that 'amateur status' is an Olympic sports concept." },
+  { word: "blazed up a doobie", phonetic: "/bleɪzd ʌp ə ˈduːbi/", tag: "slang", context: '"In the cab, on the way over, Steve blazed up a doobie."', meaning: "Slang: smoked a marijuana cigarette. 'Blazed up' = lit/smoked. 'Doobie' = a rolled marijuana cigarette. Very 1990s American slang.", example: "⚠️ Informal/slang vocabulary. You'd recognize it in TV/movies or informal speech." },
+  { word: "smoked a joint / lit a bone", phonetic: "", tag: "slang", context: '"Smoked a joint? You know, lit a bone? Weed? Hemp? Ganja?"', meaning: "Phoebe lists many slang terms for smoking marijuana. 'Joint' and 'bone' = rolled cigarette. 'Weed,' 'hemp,' 'ganja' = the substance itself. Ganja comes from Hindi/Jamaican English.", example: "Phoebe's list is funny because she keeps escalating the terms." },
+  { word: "I'm with you, Cheech", phonetic: "/tʃiːtʃ/", tag: "humor", context: '"OK, OK. I\'m with you, Cheech."', meaning: "'Cheech' refers to Cheech Marin of the comedy duo 'Cheech & Chong,' known for marijuana-themed humor. Rachel calls Phoebe 'Cheech' because she's explaining so many drug slang terms.", example: "This is a pop culture reference — knowing Cheech & Chong makes the joke land." },
+  { word: "tool (as insult)", phonetic: "/tuːl/", tag: "slang", context: '"What a tool!"', meaning: "American slang insult: a person who acts stupid, is easily manipulated, or behaves in a foolish/annoying way.", example: "Don't listen to him — he's a total tool who always shows up late and ruins everything." },
+  { word: "James Michener of dirty talk", phonetic: "/ˈdʒeɪmz ˈmɪtʃənər/", tag: "humor", context: '"I was the James Michener of dirty talk."', meaning: "James Michener was a famous American author known for extremely long, detailed novels. Ross's dirty talk was so elaborate it was like a Michener novel — with villagers, themes, motifs.", example: "Cultural reference: the funnier because it's such an unexpected comparison." },
+  { word: "dirty talk", phonetic: "/ˈdɜːti tɔːk/", tag: "phrase", context: '"She took me by surprise — she wanted me to talk dirty."', meaning: "Saying sexually suggestive or explicit things to a partner. Ross is completely unable to do this naturally, which is a running joke.", example: "Very common English phrase — you'll encounter it frequently in TV and movies." },
+  { word: "vulva", phonetic: "/ˈvʌlvə/", tag: "humor", context: '"Ross: um... vulva."', meaning: "The medical/anatomical term for female genitals. Ross panics and blurts out a clinical term instead of something sexy — this is the whole joke.", example: "The comedy works because of the contrast between what's expected and what Ross says." },
+  { word: "cuddling", phonetic: "/ˈkʌdlɪŋ/", tag: "vocab", context: '"we ended up cuddling... which was nice."', meaning: "Holding someone close in a warm, affectionate way. Joey mocks Ross for this because it means nothing romantic happened.", example: "After the movie, they sat on the couch cuddling." },
+  { word: "rooting for", phonetic: "/ˈruːtɪŋ fɔː/", tag: "phrase", context: '"I was always rooting for you two kids to get together."', meaning: "To support or cheer for someone. Chandler sarcastically says he was 'rooting for' Ross and Joey to become a couple.", example: "I've always been rooting for the underdog team to win." },
+  { word: "play hardball", phonetic: "/pleɪ ˈhɑːdbɔːl/", tag: "idiom", context: '"I\'m not playing hardball here, OK? This is not a negotiation, this is a rejection!"', meaning: "To negotiate or deal with someone in an aggressive, uncompromising way. Chandler insists he's NOT doing this, but ironically negotiates himself back into the job.", example: "The union decided to play hardball and refused to settle for anything less than a 15% raise." },
+  { word: "chick magnet", phonetic: "/tʃɪk ˈmæɡnɪt/", tag: "slang", context: '"That monkey is a chick magnet!"', meaning: "Informal/slang: something or someone that attracts women. 'Chick' is informal (slightly dated) slang for a woman or girl.", example: "He brought his puppy to the park — puppies are total chick magnets." },
+  { word: "seal the deal", phonetic: "/siːl ðə diːl/", tag: "idiom", context: '"She\'ll take one look at his furry little face and it\'ll seal the deal."', meaning: "To finalize or guarantee a successful outcome. Originally a business term, now used widely.", example: "The free dessert sealed the deal — the customer definitely left a good review." },
+  { word: "aptitude test", phonetic: "/ˈæptɪtjuːd tɛst/", tag: "vocab", context: '"Eight and a half hours of aptitude tests, intelligence tests, personality tests..."', meaning: "A test designed to measure your natural ability or talent in specific areas — used to suggest what career you're suited for.", example: "Many companies use aptitude tests as part of their hiring process." },
+  { word: "ideally suited for", phonetic: "/aɪˈdɪəli ˈsuːtɪd fɔː/", tag: "phrase", context: '"You are ideally suited for a career in data processing."', meaning: "Perfectly matched or qualified for something. The devastating punch line — the career test confirms Chandler's worst fear.", example: "With your language skills, you're ideally suited for a career in international business." },
+  { word: "slap my ass and call me Judy", phonetic: "", tag: "slang", context: '"Well, slap my ass and call me Judy! These are fantastic!"', meaning: "A comedic, exaggerated exclamation of surprise or delight. Absurdist American slang — means roughly: 'Wow, I'm completely shocked/amazed!'", example: "This is character comedy — it perfectly shows Steve is stoned and using bizarre expressions." },
+  { word: "tartlets", phonetic: "/ˈtɑːtlɪts/", tag: "humor", context: '"Tartlets. Tartlets. Tartlets. The word has lost all meaning."', meaning: "Small tarts (pastry shells with filling). The joke is a classic stoner trope: repeating a word until it sounds meaningless — semantic satiation.", example: "Repeat any word enough times and it starts to sound strange." },
+  { word: "man overboard", phonetic: "/mæn ˈəʊvəbɔːd/", tag: "phrase", context: '"Man overboard! I think he\'s drowning."', meaning: "A nautical emergency cry when someone falls off a ship. Steve uses it playfully for the Gummi Bears 'drowning' in the punch bowl.", example: "'Man overboard!' the sailor shouted as the passenger fell into the sea." },
+  { word: "stop by", phonetic: "/stɒp baɪ/", tag: "phrasal", context: '"Mr. Kostelick wants you to stop by his office."', meaning: "To visit a place briefly, without a long stay. Very common in American English for casual visits.", example: "Can you stop by the store on your way home and grab some milk?" },
+  { word: "figure out", phonetic: "/ˈfɪɡər aʊt/", tag: "phrasal", context: '"I\'m not going to figure it out working there."', meaning: "To understand, solve, or determine something. Very common in everyday English.", example: "I can't figure out why the printer isn't working — I've tried everything." },
+  { word: "hang up", phonetic: "/hæŋ ʌp/", tag: "phrasal", context: '"No! Stop saying numbers! [slams the phone down]"', meaning: "To end a phone call. Originally meant physically hanging the receiver on a hook.", example: "She was so angry that she just hung up without saying goodbye." },
+  { word: "end up", phonetic: "/ɛnd ʌp/", tag: "phrasal", context: '"we ended up cuddling"', meaning: "To finally arrive at a situation or place, often unexpectedly or as a result of events.", example: "We planned to go to a restaurant but ended up cooking at home when it rained." },
+  { word: "get together", phonetic: "/ɡɛt təˈɡɛðər/", tag: "phrasal", context: '"I was always rooting for you two kids to get together."', meaning: "To start a romantic relationship; also can mean to meet up as a group.", example: "Everyone knew they liked each other — it took them two years to finally get together." },
+  { word: "run out of", phonetic: "/rʌn aʊt əv/", tag: "phrasal", context: '"that\'s all there are of those" (Monica runs out of ravioli)', meaning: "To use all of something so that none is left; to have no more of something.", example: "We ran out of coffee at 9am and nobody could function for the rest of the morning." },
+  { word: "cheer up", phonetic: "/tʃɪər ʌp/", tag: "phrasal", context: '"Maybe this\'ll cheer you up." [Monica offers Chandler food]', meaning: "To become happier, or to make someone else feel better.", example: "She was upset about the rejection, so we took her out for ice cream to cheer her up." },
+  { word: "root for", phonetic: "/ruːt fɔː/", tag: "phrasal", context: '"I was always rooting for you two kids."', meaning: "To cheer for or support someone. Often used for sports but also for life situations.", example: "I've been rooting for her to get the promotion — she really deserves it." },
+  { word: "uh-oh", phonetic: "/ˌʌˈəʊ/", tag: "expression", context: '"Uh-oh." [Joey when Monica says she hired a different waitress]', meaning: "An exclamation used when you realize something has gone wrong or there's trouble ahead.", example: "Uh-oh — I just remembered I forgot to send that email before the deadline." },
+  { word: "Yes indeedy!", phonetic: "/jɛs ɪnˈdiːdi/", tag: "expression", context: '"Yes indeedy!" [Chandler showing off his new office]', meaning: "An exaggerated, enthusiastic version of 'yes.' Used humorously or sarcastically. Old-fashioned, folksy American expression.", example: "Did I get the promotion? Yes indeedy! Start date is Monday." },
+  { word: "That's it!", phonetic: "/ðæts ɪt/", tag: "expression", context: '"That\'s it! Dinner is over!" [Monica snaps]', meaning: "Used to say you have reached your limit and will not tolerate any more.", example: "That's it! I'm calling the landlord — the heating has been broken for two weeks." },
+  { word: "not a total loss", phonetic: "", tag: "expression", context: '"it wasn\'t a total loss. We ended up cuddling."', meaning: "Not completely bad or failed — something positive came out of it, even if it wasn't what you wanted.", example: "The trip got rained out but it wasn't a total loss — we found a great bookshop." },
+  { word: "take me by surprise", phonetic: "", tag: "expression", context: '"She took me by surprise — she wanted me to talk dirty."', meaning: "To shock or surprise someone unexpectedly. You weren't prepared for what happened.", example: "The announcement took everyone by surprise — nobody expected the CEO to resign." },
+  { word: "spoil your appetite", phonetic: "/spɔɪl jər ˈæpɪtaɪt/", tag: "expression", context: '"You don\'t want to spoil your appetite." [Monica]', meaning: "To eat or drink something that reduces your hunger before a meal, so you won't enjoy the main food.", example: "Don't eat all those crisps — you'll spoil your appetite before dinner." },
+  { word: "lost all meaning", phonetic: "", tag: "expression", context: '"Tartlets. Tartlets. Tartlets. The word has lost all meaning."', meaning: "When a word or concept has been repeated so many times it no longer makes sense. This is called semantic satiation.", example: "I've said 'deadline' so many times this week the word has lost all meaning." },
+  { word: "what's the big deal?", phonetic: "", tag: "expression", context: '"What\'s the big deal? You just say what you want to do to her."', meaning: "A question asking why something is important or why someone is upset. Can sound dismissive.", example: "What's the big deal? It's just a five-minute walk — stop complaining." },
+  { word: "talk dirty", phonetic: "/tɔːk ˈdɜːti/", tag: "romantic", context: '"Say something hot... Talk dirty."', meaning: "To say sexually suggestive or explicit things to a romantic partner. Ross is completely unable to do this naturally — the source of the funniest scene.", example: "Very common phrase in TV/film. You'll hear it frequently in English-language media." },
+  { word: "caress", phonetic: "/kəˈrɛs/", tag: "romantic", context: '"I want to caress my butt..."', meaning: "To touch someone gently and lovingly. A tender, affectionate physical gesture. More formal/literary than 'stroke' or 'touch.'", example: "She caressed his cheek gently and smiled." },
+  { word: "trembling", phonetic: "/ˈtrɛmblɪŋ/", tag: "romantic", context: '"...until you\'re trembling with..."', meaning: "Shaking slightly, often from emotion, excitement, cold, or fear. In a romantic context, it suggests overwhelming feeling.", example: "She was trembling with excitement as she opened the acceptance letter." },
+  { word: "promotion", phonetic: "/prəˈməʊʃən/", tag: "business", context: '"Big Al wants to make me processing supervisor." "So.... I quit."', meaning: "A move to a higher position at work, usually with more responsibility and better pay. Chandler refuses his promotion, driving the whole episode.", example: "After five years of hard work, she finally received a promotion to senior manager." },
+  { word: "bonus structure", phonetic: "/ˈbəʊnəs ˈstrʌktʃər/", tag: "business", context: '"And that\'s on top of the yearly bonus structure you mentioned earlier?"', meaning: "The system defining how and when employees receive extra payments beyond their base salary. Chandler accidentally negotiates his own bonus.", example: "The company offers a competitive bonus structure tied to quarterly performance targets." },
+  { word: "negotiation", phonetic: "/nɪˌɡəʊʃɪˈeɪʃən/", tag: "business", context: '"This is not a negotiation, this is a rejection!"', meaning: "A discussion between two parties to reach a mutually acceptable agreement. Chandler insists he's not negotiating — but he absolutely is.", example: "The salary negotiation lasted two weeks before both sides finally agreed." },
+  { word: "head chef", phonetic: "/hɛd ʃɛf/", tag: "business", context: '"He\'s looking for a head chef."', meaning: "The main chef in a restaurant responsible for the entire kitchen, menu, and staff. The top culinary position — Monica's dream job.", example: "After ten years working her way up, she was finally named head chef of the restaurant." },
+  { word: "multinational corporation", phonetic: "/ˌmʌltɪˈnæʃənl kɔːpəˈreɪʃən/", tag: "business", context: '"You are ideally suited for a career in data processing for a large multinational corporation."', meaning: "A company that operates in multiple countries. The career test's result is especially crushing because it's so specific.", example: "She left the multinational corporation to start her own small business." },
+];
 
-  const tabsEl    = document.getElementById('tabs');
-  const gridEl    = document.getElementById('grid');
-  const labelEl   = document.getElementById('season-label');
-  const countEl   = document.getElementById('ep-count');
+const dialogueData = [
+  { speaker: "Monica", text: `Why does my <span class="highlight-word">swizzel stick<span class="tooltip">🍹 VOCAB — A small stick used to stir cocktails. Monica finds a pencil in her coffee — Rachel mixed them up by mistake.</span></span> have an eraser?` },
+  { speaker: "Rachel", text: `[checks behind her ear and finds a swizzel stick] Oh! That's why. I'm sorry!` },
+  { speaker: "Chandler", text: `So, it's a typical day at work. I'm <span class="highlight-word">putting in<span class="tooltip">🔗 PHRASAL VERB — To enter data into a computer or system. Very common in office contexts.</span></span> my numbers, and then big Al <span class="highlight-word">calls me into<span class="tooltip">🔗 PHRASAL VERB — To summon someone to your office for something important.</span></span> his office and tells me he wants to make me <span class="highlight-word">processing supervisor<span class="tooltip">💼 BUSINESS — A management role overseeing data processing. Chandler sees it as a trap.</span></span>. So... I quit.` },
+  { speaker: "Monica", text: `Uh, Chandler... you've been there for five years.` },
+  { speaker: "Chandler", text: `This was supposed to be a <span class="highlight-word">temp job<span class="tooltip">💼 BUSINESS — Temporary job, planned to be short-term. He stayed 5 years without noticing!</span></span>! If I took this <span class="highlight-word">promotion<span class="tooltip">💼 BUSINESS — A move to a higher position. Chandler refuses it — driving the whole episode.</span></span>, it'd be like admitting that this is what I actually do.` },
+  { speaker: "Chandler", text: `I just don't want to be <span class="highlight-word">one of those guys<span class="tooltip">💡 EXPRESSION — Refers to a type of person you don't want to become. "One of those guys who stays late" = a workaholic.</span></span> that's in his office until twelve o'clock at night worrying about the <span class="highlight-word">WENUS<span class="tooltip">😂 COMEDY — Weekly Estimated Net Usage Systems. Made-up corporate jargon. Becomes the episode's ironic punchline at the very end.</span></span>.` },
+  { speaker: "Rachel", text: `...the <span class="highlight-word">WENUS<span class="tooltip">😂 COMEDY — Rachel's deadpan "Oh. That WENUS." is pure sarcasm. She pretends she knew all along.</span></span>?` },
+  { speaker: "Phoebe", text: `He's opening up a restaurant and he's looking for a <span class="highlight-word">head chef<span class="tooltip">💼 BUSINESS — The main chef responsible for the entire kitchen and menu. Monica's dream job.</span></span>. He wants to do some <span class="highlight-word">eclectic<span class="tooltip">📚 VOCAB — Selecting from a wide variety of styles or influences. An eclectic menu mixes different cuisines creatively.</span></span> food.` },
+  { speaker: "Chandler", text: `I have an appointment to see Dr. Robert Pillman, <span class="highlight-word">career counselor<span class="tooltip">💼 BUSINESS — A professional who helps people figure out what career suits them. Chandler pays for 8.5 hours and gets the worst possible answer.</span></span> <span class="highlight-word">a-gogo<span class="tooltip">😂 COMEDY — A playful suffix meaning "galore." Chandler adds it himself to make the title sound absurdly enthusiastic.</span></span>. I added the 'a-gogo'.` },
+  { speaker: "Ross", text: `Ah, the lesser-known <span class="highlight-word">"I don't have a dream" speech<span class="tooltip">😂 COMEDY — A reference to MLK's famous "I Have a Dream" speech (1963). Ross jokes that Chandler's negative version is the obscure counterpart.</span></span>.` },
+  { speaker: "Monica", text: `I'm cooking dinner for him Monday night — kind of like an <span class="highlight-word">audition<span class="tooltip">📚 VOCAB — A trial performance to prove your skills. Monica's dinner IS her job interview.</span></span>. And Phoebe, he really wants you to be here so you can 'ooh' and 'ahh' and make yummy noises.` },
+  { speaker: "Rachel", text: `Oh! I see. And I've sort of been <span class="highlight-word">maintaining my amateur status<span class="tooltip">😂 COMEDY — Olympic athletes must be "amateur" to compete. Rachel sarcastically uses this sports rule to mock Monica's comment.</span></span> so that I can waitress in the Olympics.` },
+  { speaker: "Chandler", text: `You know, I don't mean to brag, but I waited tables at Innsbruck in '76. [silence] <span class="highlight-word">Amuse-bouche<span class="tooltip">📚 VOCAB — French: "amuse the mouth." A tiny one-bite appetizer served before a meal. Very fancy fine dining term.</span></span>? [holds out tray]` },
+  { speaker: "Chandler", text: `Eight and a half hours of <span class="highlight-word">aptitude tests<span class="tooltip">📚 VOCAB — Tests that measure your natural ability in specific areas. The cruel irony: after all that, Chandler is told to keep his current job.</span></span>... and what do I learn? "You are <span class="highlight-word">ideally suited for<span class="tooltip">💡 EXPRESSION — Perfectly matched or qualified for something. The devastating punch line of Chandler's career crisis.</span></span> a career in data processing for a large <span class="highlight-word">multinational corporation<span class="tooltip">💼 BUSINESS — A company operating across multiple countries. Crushingly specific result.</span></span>."` },
+  { speaker: "Monica", text: `It's supposed to be that small. It's a pre-appetizer. The French call it an <span class="highlight-word">amuse-bouche<span class="tooltip">📚 VOCAB — French: 'amuse the mouth.' Chandler puns: "It IS amouz-ing." That's a play on 'amusing.'</span></span>.` },
+  { speaker: "Chandler", text: `Well... it IS <span class="highlight-word">amouz-ing<span class="tooltip">😂 COMEDY — A pun! "Amouz-ing" sounds like "amusing." Chandler twists the French word into an English joke.</span></span>...` },
+  { speaker: "Monica", text: `[on phone] Wendy! Wendy! Wendy! [<span class="highlight-word">hangs up<span class="tooltip">🔗 PHRASAL VERB — To end a phone call. Originally: placing the receiver back on its hook.</span></span>] Wendy bailed. I have no waitress.` },
+  { speaker: "Phoebe", text: `[whispers] In the cab, on the way over, Steve <span class="highlight-word">blazed up a doobie<span class="tooltip">🔥 SLANG — Smoked a marijuana cigarette. "Blazed up" = lit it. "Doobie" = rolled joint. Classic 1990s slang.</span></span>.` },
+  { speaker: "Phoebe", text: `<span class="highlight-word">Smoked a joint<span class="tooltip">🔥 SLANG — A rolled marijuana cigarette. One of the most common slang terms.</span></span>? You know, <span class="highlight-word">lit a bone<span class="tooltip">🔥 SLANG — Another term for smoking marijuana.</span></span>? <span class="highlight-word">Weed<span class="tooltip">🔥 SLANG — Very common informal word for marijuana.</span></span>? Hemp? <span class="highlight-word">Ganja<span class="tooltip">🔥 SLANG — From Hindi/Jamaican English. Widely recognized slang for marijuana.</span></span>?` },
+  { speaker: "Rachel", text: `OK, OK. I'm with you, <span class="highlight-word">Cheech<span class="tooltip">😂 COMEDY — Cheech Marin of Cheech & Chong, famous for marijuana humor. One word = a whole cultural reference.</span></span>.` },
+  { speaker: "Steve", text: `Well, <span class="highlight-word">slap my ass and call me Judy<span class="tooltip">😂 COMEDY — An absurdist American exclamation of extreme amazement. Means roughly: "I am completely blown away!" Shows Steve is very high.</span></span>! These are fantastic! I could eat a hundred of them!` },
+  { speaker: "Steve", text: `<span class="highlight-word">Tartlets. Tartlets. Tartlets.<span class="tooltip">😂 COMEDY — Semantic satiation: repeating a word until it sounds meaningless. One of Friends' most quoted stoner moments.</span></span> The word has <span class="highlight-word">lost all meaning<span class="tooltip">💡 EXPRESSION — Repeating a word until it stops making sense. A real psychological phenomenon.</span></span>.` },
+  { speaker: "Steve", text: `[in kitchen] Ah, cool! Taco shells! You know, these are... they're like a little <span class="highlight-word">corn envelope<span class="tooltip">😂 COMEDY — Steve can't find the word "taco shell" so he invents a description. Logically accurate but completely wrong.</span></span>.` },
+  { speaker: "Steve", text: `[throws Gummi Bears into punch bowl] <span class="highlight-word">Man overboard<span class="tooltip">💡 EXPRESSION — A nautical emergency cry. Steve uses it absurdly for the Gummi Bears "drowning" in the punch bowl.</span></span>! I think he's drowning. Hey fellows! Grab on a Sugar-O... save yourself!` },
+  { speaker: "Monica", text: `<span class="highlight-word">That's it!<span class="tooltip">💡 EXPRESSION — Signals you've reached your limit. Strong, definitive. Monica has had enough.</span></span> Dinner is over! I've waited seven years for an opportunity like this, and you can't even wait four and a half minutes for a stupid onion tartlet?` },
+  { speaker: "Joey", text: `[in disbelief] <span class="highlight-word">Vulva<span class="tooltip">😂 COMEDY — The clinical anatomical term for female genitals. Ross panics and blurts this instead of something romantic. One of Friends' most memorable moments.</span></span>?` },
+  { speaker: "Ross", text: `Alright, I panicked. She <span class="highlight-word">took me by surprise<span class="tooltip">💡 EXPRESSION — To shock or catch someone off guard unexpectedly.</span></span>. But it <span class="highlight-word">wasn't a total loss<span class="tooltip">💡 EXPRESSION — Not completely bad; something positive came from it.</span></span>. We <span class="highlight-word">ended up<span class="tooltip">🔗 PHRASAL VERB — To finally arrive at a result, often unexpectedly.</span></span> cuddling.` },
+  { speaker: "Joey", text: `Oh... Ross... you <span class="highlight-word">get me so hot<span class="tooltip">❤️ ROMANTIC — Informal: to make someone feel sexually attracted or excited. Joey demonstrates confidently.</span></span>. I want your lips on me now.` },
+  { speaker: "Joey", text: `Tell me you want to <span class="highlight-word">caress<span class="tooltip">❤️ ROMANTIC — To touch someone gently and lovingly. More literary/formal than "stroke" or "touch."</span></span> my butt!` },
+  { speaker: "Ross", text: `I want to take my tongue... and... run it all over your body until you're... <span class="highlight-word">trembling<span class="tooltip">❤️ ROMANTIC — Shaking slightly from intense emotion or excitement.</span></span> with...` },
+  { speaker: "Chandler", text: `[walks in, watches silently] ...with??` },
+  { speaker: "Chandler", text: `It's OK. I was always <span class="highlight-word">rooting for<span class="tooltip">🔗 PHRASAL VERB — To support or cheer for someone. Used sarcastically here.</span></span> you two kids to <span class="highlight-word">get together<span class="tooltip">🔗 PHRASAL VERB — To start a romantic relationship. Chandler teases them after walking in on the scene.</span></span>.` },
+  { speaker: "Ross", text: `Oh, I was unbelievable. I was the <span class="highlight-word">James Michener<span class="tooltip">😂 COMEDY — Michener wrote enormously long novels with vast casts and themes. Ross applying this to dirty talk is perfectly absurd.</span></span> of dirty talk. There were different characters, plot lines, themes, a motif... at one point there were <span class="highlight-word">villagers<span class="tooltip">😂 COMEDY — The funniest word. "Villagers" is completely out of place in a romantic context.</span></span>.` },
+  { speaker: "Chandler", text: `[on phone] Look, Al, I'm not <span class="highlight-word">playing hardball<span class="tooltip">🎭 IDIOM — Negotiating in a tough, uncompromising way. Chandler insists he's NOT doing this — but he absolutely is.</span></span> here. This is not a <span class="highlight-word">negotiation<span class="tooltip">💼 BUSINESS — A discussion to reach agreement. Chandler says this isn't one. It very much is.</span></span>, this is a <span class="highlight-word">rejection<span class="tooltip">💼 BUSINESS — A firm refusal. Watch what happens next...</span></span>! … No! Stop saying numbers! <span class="highlight-word">You've got the wrong guy!<span class="tooltip">💡 EXPRESSION — "I'm not the right person for this." Then immediately contradicted.</span></span> … I'll see you on Monday! [slams phone down]` },
+  { speaker: "Chandler", text: `[later, yelling] Fran, I'm looking at the <span class="highlight-word">WENUS<span class="tooltip">😂 COMEDY — The perfect callback. Chandler spent the whole episode refusing to become "the WENUS guy." Here he is, at midnight, yelling about the WENUS.</span></span> and I'm not happy! … You WILL care about it, because I care about it!` },
+  { speaker: "Chandler", text: `<span class="highlight-word">Whoooaaaa...<span class="tooltip">😂 COMEDY — The perfect one-word ending. Chandler has become exactly what he feared: the man who screams about the WENUS at midnight.</span></span>` },
+];
 
-  let current = 1;
+const quizData = [
+  { type: "multiple", question: "What does 'a temp job' mean?", excerpt: '"This was supposed to be a temp job!"', options: ["A high-paying job", "A temporary job you plan to leave", "A job at a temperature plant", "A boring, repetitive job"], answer: 1, explanation: "Temp = temporary. Chandler took the job thinking it was short-term, but accidentally stayed 5 years." },
+  { type: "multiple", question: "What does 'WENUS' stand for?", excerpt: '"I just don\'t want to be worrying about the WENUS."', options: ["A planet", "Weekly Estimated Net Usage Systems", "Work Evaluation and Numbering Unit System", "Chandler never says"], answer: 1, explanation: "Weekly Estimated Net Usage Systems — completely made up corporate jargon that Chandler hates." },
+  { type: "multiple", question: "What does 'blazed up a doobie' mean?", excerpt: '"In the cab, on the way over, Steve blazed up a doobie."', options: ["He made a phone call", "He smoked marijuana", "He lit a cigar", "He fell asleep"], answer: 1, explanation: "'Blazed up' = lit and smoked. 'Doobie' = a rolled marijuana cigarette. 1990s slang." },
+  { type: "multiple", question: "Why does Rachel call Phoebe 'Cheech'?", excerpt: '"OK, OK. I\'m with you, Cheech."', options: ["It's Phoebe's nickname", "Cheech Marin is famous for drug comedy, and Phoebe is listing drug slang", "Cheech is a French term", "Rachel is confused"], answer: 1, explanation: "Cheech Marin of Cheech & Chong is an iconic drug-comedy reference. Rachel calls Phoebe this because she lists so many marijuana terms." },
+  { type: "fill", question: "Fill in the blank: 'She'll take one look at Marcel and it'll _____ _____ _____.'", excerpt: '"That monkey is a chick magnet! She\'s going to take one look at his furry little face and it\'ll _____ _____ _____."', answer: "seal the deal", explanation: "'Seal the deal' = to finalize a successful outcome. Joey means the monkey guarantees Ross gets the girl." },
+  { type: "multiple", question: "What is an 'amuse-bouche'?", excerpt: '"The French call it an amuse-bouche."', options: ["A French insult", "A tiny one-bite appetizer before a meal", "A type of bread", "A cooking technique"], answer: 1, explanation: "French: 'amuse the mouth.' A tiny culinary introduction. Chandler puns: 'It is amouz-ing.'" },
+  { type: "multiple", question: "What does 'playing hardball' mean?", excerpt: '"I\'m not playing hardball here — this is not a negotiation, this is a rejection!"', options: ["Playing baseball seriously", "Negotiating in a tough, uncompromising way", "Refusing to talk at all", "Being physically aggressive"], answer: 1, explanation: "To play hardball = to negotiate aggressively. While saying he's NOT negotiating, Chandler IS negotiating." },
+  { type: "multiple", question: "Why does Ross say 'vulva' to Celia?", excerpt: '"Say something hot... Ross: um... vulva."', options: ["He's a scientist and uses clinical terms", "He panics and blurts out the only word he can think of", "He thinks it sounds romantic", "It's a foreign language word"], answer: 1, explanation: "Ross panics when asked for 'dirty talk' and blurts a clinical term. The comedy is the contrast: medical vs. sexy." },
+  { type: "fill", question: "Complete: 'That monkey is a total _____ _____!'", excerpt: '"That monkey is a total _____ _____! She\'s going to love him."', answer: "chick magnet", explanation: "'Chick magnet' = something that attracts women. 'Chick' is informal slang for a woman." },
+  { type: "multiple", question: "What is 'semantic satiation' as shown in the episode?", excerpt: '"Tartlets. Tartlets. Tartlets. The word has lost all meaning."', options: ["Getting full from tarts", "Repeating a word until it sounds meaningless", "A type of eating disorder", "French cooking philosophy"], answer: 1, explanation: "Semantic satiation = when you repeat a word so many times it stops making sense. Steve does this with 'tartlets.'" },
+  { type: "multiple", question: "What does Joey mean when he calls Steve 'a tool'?", excerpt: '"What a tool!"', options: ["Steve is useful to have around", "Steve is a carpenter", "Steve is a foolish, annoying person", "Steve is very clever"], answer: 2, explanation: "'Tool' as an insult = a stupid, annoying, or easily manipulated person. Steve ruined Monica's big dinner." },
+  { type: "multiple", question: "When Ross says he was 'the James Michener of dirty talk,' what does he mean?", excerpt: '"I was the James Michener of dirty talk — different characters, plot lines, themes, a motif... at one point there were villagers."', options: ["He talked very quietly", "He talked for a very long time with elaborate detail", "He used romantic language", "He spoke in French"], answer: 1, explanation: "James Michener wrote famously long, detailed novels. Ross's dirty talk was epically over-complicated." },
+];
 
-  // Build tabs
-  seasons.forEach(s => {
-    const btn = document.createElement('button');
-    btn.className = 'tab' + (s.n === 1 ? ' active' : '');
-    btn.textContent = `S${String(s.n).padStart(2,'0')}`;
-    btn.dataset.season = s.n;
-    btn.addEventListener('click', () => switchSeason(s.n));
-    tabsEl.appendChild(btn);
+const cultureData = [
+  { emoji: "🎤", title: "Martin Luther King Jr. — 'I Have a Dream'", text: "One of the most famous speeches in American history (1963). Ross's joke 'the lesser-known I don't have a dream speech' only works if you know the original. This type of reference humor is very common in American TV comedy — knowing the reference makes you 'in' on the joke." },
+  { emoji: "🍁", title: "Cheech & Chong — Drug Comedy", text: "Cheech Marin and Tommy Chong were a wildly popular comedy duo in the 1970s–80s known for marijuana-themed humor. By 1994 when Friends aired, they were cultural icons. Rachel calling Phoebe 'Cheech' is a quick, smart pop culture shorthand — one word communicates a whole concept." },
+  { emoji: "📚", title: "James Michener — The Long Novel", text: "James Michener (1907–1997) wrote enormously long novels like 'Hawaii,' 'Centennial,' and 'The Source' — often 1,000+ pages with vast casts of characters, multiple generations, and strong 'motifs.' Ross applying this to dirty talk is absurdist comedy at its finest." },
+  { emoji: "🏢", title: "Corporate America — The 'Golden Handcuffs' Trap", text: "Chandler's story is very relatable to American workers: you take a 'temporary' job, get comfortable, and suddenly years pass. The 'golden handcuffs' is an expression for when salary is so good you can't leave even if you hate the job. The WENUS ending shows Chandler has fully transformed." },
+  { emoji: "🍽️", title: "Fine Dining Culture — Amuse-Bouche", text: "In the 1990s, French fine dining terms were becoming trendy in American restaurants. 'Amuse-bouche,' 'tasting menu,' 'eclectic cuisine' — Monica uses these to show she's a serious professional chef. Chandler's pun ('it is amouz-ing') gently mocks the pretension." },
+  { emoji: "🎭", title: "The Stoner Comedy Trope", text: "Steve's behavior follows classic comedy writing about marijuana: craving junk food (munchies), word-finding problems ('little corn envelope'), fixating on objects, losing track of time. Friends plays this for comedy but also uses it to create obstacles for Monica — showing how random bad luck can destroy big opportunities." },
+  { emoji: "🐒", title: "The Dirty Talk Practice Scene", text: "The scene where Ross practices with Joey (with Chandler watching) is a masterclass in situational comedy. It works on multiple levels: Ross's clinical awkwardness, Joey's surprising competence, and the perfectly timed interruption. Notice how the comedy escalates — each line funnier than the last." },
+  { emoji: "🇺🇸", title: "'Temp job' Culture in 1990s New York", text: "In the early 1990s, many young people in New York did 'temp work' while pursuing creative careers. Chandler is the comic embodiment of someone who accidentally fell into corporate life. His story resonates because it's universal — the gap between who we think we'll be and who we actually become." },
+];
+
+// ── RENDER VOCAB ──
+function renderVocab() {
+  const tagLabels = { slang:'🔥 Slang', phrase:'💬 Phrase', vocab:'📚 Vocab', idiom:'🎭 Idiom', humor:'😂 Comedy', phrasal:'🔗 Phrasal Verb', expression:'💡 Expression', romantic:'❤️ Romantic', business:'💼 Business' };
+  document.getElementById('vocabGrid').innerHTML = vocabData.map(v => `
+    <div class="vocab-card" data-tag="${v.tag}" onclick="toggleCard(this)">
+      <div class="card-tag">${tagLabels[v.tag] || v.tag}</div>
+      <div class="vocab-word">${v.word}</div>
+      ${v.phonetic ? `<div class="vocab-phonetic">${v.phonetic}</div>` : ''}
+      <div class="vocab-context">"${v.context}"</div>
+      <div class="vocab-reveal-hint">Tap to reveal</div>
+      <div class="vocab-meaning">${v.meaning}<div class="example">💡 ${v.example}</div></div>
+    </div>
+  `).join('');
+}
+
+function toggleCard(card) { card.classList.toggle('revealed'); }
+
+function filterVocab(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  applyFilters(tag, query);
+}
+
+function searchVocab(query) {
+  const q = query.trim().toLowerCase();
+  const clearBtn = document.getElementById('searchClear');
+  clearBtn.classList.toggle('visible', q.length > 0);
+  // reset filter to 'all' when typing
+  const activeTag = document.querySelector('.filter-btn.active')?.dataset?.tag || 'all';
+  applyFilters(activeTag, q);
+}
+
+function applyFilters(tag, query) {
+  const cards = document.querySelectorAll('.vocab-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const matchTag = tag === 'all' || card.dataset.tag === tag;
+    let matchSearch = true;
+
+    if (query) {
+      const word = card.querySelector('.vocab-word')?.textContent.toLowerCase() || '';
+      const context = card.querySelector('.vocab-context')?.textContent.toLowerCase() || '';
+      const meaning = card.querySelector('.vocab-meaning')?.textContent.toLowerCase() || '';
+      matchSearch = word.includes(query) || context.includes(query) || meaning.includes(query);
+
+      // highlight matching text in word
+      const wordEl = card.querySelector('.vocab-word');
+      if (wordEl) {
+        const original = wordEl.dataset.original || wordEl.textContent;
+        wordEl.dataset.original = original;
+        if (matchSearch) {
+          const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+          wordEl.innerHTML = original.replace(re, '<mark class="search-highlight">$1</mark>');
+        } else {
+          wordEl.textContent = original;
+        }
+      }
+    } else {
+      // clear highlights
+      const wordEl = card.querySelector('.vocab-word');
+      if (wordEl && wordEl.dataset.original) {
+        wordEl.textContent = wordEl.dataset.original;
+      }
+    }
+
+    const show = matchTag && matchSearch;
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
   });
 
-  function pad(n) { return String(n).padStart(2, '0'); }
+  // update count
+  const countEl = document.getElementById('searchCount');
+  const noResults = document.getElementById('noResults');
+  const noResultsQuery = document.getElementById('noResultsQuery');
 
-  function buildEpPath(s, e) {
-    return `S${pad(s)}E${pad(e)}/index.html`;
+  if (query) {
+    countEl.innerHTML = `<span>${visible}</span> result${visible !== 1 ? 's' : ''} for "<span>${query}</span>"`;
+  } else {
+    countEl.innerHTML = '';
   }
 
-  function switchSeason(n) {
-    if (n === current) return;
-    current = n;
-
-    // update tabs
-    tabsEl.querySelectorAll('.tab').forEach(t => {
-      t.classList.toggle('active', Number(t.dataset.season) === n);
-    });
-
-    // update label
-    const season = seasons.find(s => s.n === n);
-    labelEl.textContent = `Season ${n}`;
-    countEl.textContent = `${season.eps} Episodes`;
-
-    // rebuild grid with animation
-    renderGrid(season);
+  if (visible === 0) {
+    noResults.classList.add('show');
+    noResultsQuery.textContent = `"${query}"`;
+  } else {
+    noResults.classList.remove('show');
   }
+}
 
-  function renderGrid(season) {
-    gridEl.innerHTML = '';
-    for (let e = 1; e <= season.eps; e++) {
-      const card = document.createElement('a');
-      card.className = 'ep-card';
-      card.href = buildEpPath(season.n, e);
-      card.style.animationDelay = `${(e - 1) * 25}ms`;
-      const epCode = `S${pad(season.n)}E${pad(e)}`;
-      card.innerHTML = `<div class="ep-num">${epCode}</div><div class="ep-tag">Episode</div>`;
-      gridEl.appendChild(card);
-    }
-  }
+function clearSearch() {
+  const input = document.getElementById('searchInput');
+  input.value = '';
+  document.getElementById('searchClear').classList.remove('visible');
+  document.getElementById('searchCount').innerHTML = '';
+  document.getElementById('noResults').classList.remove('show');
+  const activeTag = document.querySelector('.filter-btn.active')?.dataset?.tag || 'all';
+  applyFilters(activeTag, '');
+  input.focus();
+}
 
-  // Initial render
-  renderGrid(seasons[0]);
+// ── RENDER DIALOGUE ──
+function renderDialogue() {
+  document.getElementById('dialogueLines').innerHTML = dialogueData.map(line => `
+    <div class="dialogue-line">
+      <div><span class="speaker-label speaker-${line.speaker}">${line.speaker}</span></div>
+      <div class="dialogue-text">${line.text}</div>
+    </div>
+  `).join('');
+}
+
+// ── RENDER CULTURE ──
+function renderCulture() {
+  document.getElementById('cultureNotes').innerHTML = cultureData.map(c => `
+    <div class="culture-card">
+      <div class="culture-emoji">${c.emoji}</div>
+      <div><h3>${c.title}</h3><p>${c.text}</p></div>
+    </div>
+  `).join('');
+}
+
+// ── QUIZ ENGINE ──
+let quizState = { current: 0, score: 0, answered: false, questions: [] };
+
+function shuffleArray(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+function startQuiz() {
+  quizState = { current: 0, score: 0, answered: false, questions: shuffleArray(quizData) };
+  renderCurrentQuestion();
+}
+
+function renderCurrentQuestion() {
+  const { questions, current, score } = quizState;
+  const total = questions.length;
+  if (current >= total) { renderQuizScore(); return; }
+  const q = questions[current];
+  const progress = (current / total) * 100;
+
+  let qHTML = q.type === 'multiple'
+    ? `<div class="quiz-options">${q.options.map((opt, i) => `<button class="quiz-option" onclick="checkMultiple(${i})">${opt}</button>`).join('')}</div>`
+    : `<input type="text" class="fill-input" id="fillInput" placeholder="Type your answer..." onkeydown="if(event.key==='Enter') checkFill()"><div class="btn-group"><button class="btn btn-primary" onclick="checkFill()">Check Answer</button></div>`;
+
+  document.getElementById('quizContainer').innerHTML = `
+    <div class="quiz-stats"><span>Question ${current + 1} of ${total}</span><span>Score: ${score}</span></div>
+    <div class="progress-wrap"><div class="progress-fill" style="width:${progress}%"></div></div>
+    <div class="quiz-card">
+      <div class="quiz-badge">${q.type === 'fill' ? '✏️ Fill in the blank' : '🔘 Multiple choice'}</div>
+      <div class="quiz-question">${q.question}</div>
+      <div class="quiz-excerpt">${q.excerpt}</div>
+      ${qHTML}
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <div id="nextBtnArea"></div>
+    </div>
+  `;
+}
+
+function checkMultiple(selected) {
+  if (quizState.answered) return;
+  quizState.answered = true;
+  const q = quizState.questions[quizState.current];
+  const options = document.querySelectorAll('.quiz-option');
+  options.forEach(b => b.disabled = true);
+  options[q.answer].classList.add('correct');
+  if (selected === q.answer) { quizState.score++; options[selected].classList.add('correct'); } else { options[selected].classList.add('wrong'); }
+  const fb = document.getElementById('quizFeedback');
+  fb.className = `quiz-feedback show ${selected === q.answer ? 'correct-fb' : 'wrong-fb'}`;
+  fb.textContent = (selected === q.answer ? '✅ Correct! ' : '❌ Not quite. ') + q.explanation;
+  showNextBtn();
+}
+
+function checkFill() {
+  if (quizState.answered) return;
+  quizState.answered = true;
+  const q = quizState.questions[quizState.current];
+  const input = document.getElementById('fillInput');
+  const ua = input.value.trim().toLowerCase();
+  const ca = q.answer.toLowerCase();
+  const isCorrect = ua === ca || (ca.includes(ua) && ua.length > 4);
+  if (isCorrect) quizState.score++;
+  input.className = `fill-input ${isCorrect ? 'correct' : 'wrong'}`;
+  input.disabled = true;
+  const fb = document.getElementById('quizFeedback');
+  fb.className = `quiz-feedback show ${isCorrect ? 'correct-fb' : 'wrong-fb'}`;
+  fb.textContent = isCorrect ? '✅ Correct! ' + q.explanation : `❌ The answer is "${q.answer}". ${q.explanation}`;
+  showNextBtn();
+}
+
+function showNextBtn() {
+  const isLast = quizState.current >= quizState.questions.length - 1;
+  document.getElementById('nextBtnArea').innerHTML = `<div class="btn-group" style="margin-top:16px"><button class="btn btn-primary" onclick="nextQuestion()">${isLast ? '🏆 See Results' : 'Next →'}</button></div>`;
+}
+
+function nextQuestion() {
+  quizState.current++;
+  quizState.answered = false;
+  renderCurrentQuestion();
+}
+
+function renderQuizScore() {
+  const { score, questions } = quizState;
+  const total = questions.length;
+  const pct = Math.round((score / total) * 100);
+  const msgs = ["Don't worry — every episode is a new chance! 💪", "Good start! Watch the episode again.", "Getting there! A few more reviews.", "Nice work! Your slang game is developing.", "Really solid! You're picking up the vocab.", "Great job!", "Impressive!", "Excellent!", "Outstanding!", "Almost perfect!", "PERFECT! 🎉 You ARE the WENUS.", "PERFECT! Ross would be proud.", "FLAWLESS! Slap my ass and call me Judy — you ACED it!"];
+  const msg = msgs[Math.min(score, msgs.length - 1)];
+  document.getElementById('quizContainer').innerHTML = `
+    <div class="quiz-score">
+      <div class="score-num">${score}<span class="score-denom">/${total}</span></div>
+      <div class="score-label">Final Score · ${pct}%</div>
+      <div class="score-msg">${msg}</div>
+      <div class="btn-group" style="justify-content:center">
+        <button class="btn btn-primary" onclick="startQuiz()">Try Again</button>
+        <button class="btn btn-secondary" onclick="showSection('vocab')">Review Vocab</button>
+      </div>
+    </div>
+  `;
+}
+
+// ── TABS ──
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn[onclick]').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabs = ['vocab','dialogue','quiz','culture'];
+  const btns = document.querySelectorAll('.tab-btn[onclick]');
+  const idx = tabs.indexOf(id);
+  if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+  if (id === 'quiz' && quizState.current === 0 && quizState.score === 0) startQuiz();
+}
+
+renderVocab();
+renderDialogue();
+renderCulture();
 </script>
 </body>
 </html>
