@@ -428,7 +428,7 @@
       <circle cx="11" cy="11" r="7" stroke="#9AA0A6" stroke-width="2"/>
       <path d="M16.5 16.5L21 21" stroke="#9AA0A6" stroke-width="2" stroke-linecap="round"/>
     </svg>
-    <input id="search-input" type="text" placeholder="S01E23" autocomplete="off" spellcheck="false" />
+    <input id="search-input" type="text" placeholder="S01E23 · S03 · 21" autocomplete="off" spellcheck="false" />
     <button id="clear-btn" style="display:none; background:none; border:none; cursor:pointer; color:#9AA0A6; font-size:1.1rem; line-height:1; padding:0 4px;">✕</button>
   </div>
 
@@ -554,23 +554,12 @@
     // deactivate all chips during search
     chipsEl.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
 
-    // parse formats: S01E23, S1E23, 01E23, 1E23, E23, just a number etc.
-    const match = raw.match(/^(?:S(\d{1,2}))?E?(\d{1,2})$/) ||
-                  raw.match(/^S(\d{1,2})E(\d{1,2})$/);
-
     gridEl.innerHTML = '';
 
-    if (!match) {
-      infoEl.innerHTML = `No results for <strong>"${searchEl.value}"</strong>`;
-      gridEl.innerHTML = `<div class="no-results">Try format like <strong>S01E23</strong></div>`;
-      return;
-    }
-
-    // Full S##E## match
+    // ── Full S##E## → exact episode
     const fullMatch = raw.match(/^S(\d{1,2})E(\d{1,2})$/);
     if (fullMatch) {
-      const sn = parseInt(fullMatch[1]);
-      const en = parseInt(fullMatch[2]);
+      const sn = parseInt(fullMatch[1]), en = parseInt(fullMatch[2]);
       const season = seasons.find(s => s.n === sn);
       if (season && en >= 1 && en <= season.eps) {
         infoEl.innerHTML = `1 result for <strong>${raw}</strong>`;
@@ -582,7 +571,7 @@
       return;
     }
 
-    // Partial: just S## → show all episodes of that season
+    // ── S## only → all episodes of that season
     const sOnly = raw.match(/^S(\d{1,2})$/);
     if (sOnly) {
       const sn = parseInt(sOnly[1]);
@@ -597,8 +586,24 @@
       return;
     }
 
+    // ── E## or ##  → episode number across ALL seasons
+    const eOnly = raw.match(/^E?(\d{1,2})$/);
+    if (eOnly) {
+      const en = parseInt(eOnly[1]);
+      const results = [];
+      seasons.forEach(s => { if (en >= 1 && en <= s.eps) results.push(s.n); });
+      if (results.length) {
+        infoEl.innerHTML = `<strong>${results.length}</strong> results for <strong>Episode ${en}</strong> across all seasons`;
+        results.forEach((sn, i) => gridEl.appendChild(makeCard(sn, en, i * 22)));
+      } else {
+        infoEl.innerHTML = `No results for <strong>Episode ${en}</strong>`;
+        gridEl.innerHTML = `<div class="no-results">Episode <strong>${en}</strong> not found in any season</div>`;
+      }
+      return;
+    }
+
     infoEl.innerHTML = `No results for <strong>"${searchEl.value}"</strong>`;
-    gridEl.innerHTML = `<div class="no-results">Try format like <strong>S01E23</strong></div>`;
+    gridEl.innerHTML = `<div class="no-results">Try <strong>S01E23</strong>, <strong>S03</strong>, or just <strong>21</strong></div>`;
   });
 
   // Enter key → navigate directly if single result
