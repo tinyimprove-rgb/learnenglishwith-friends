@@ -140,9 +140,38 @@
 
   /* ── CONTENT ── */
   .content { max-width: 900px; margin: 0 auto; padding: 40px 48px; }
-  @media (max-width: 640px) { .content { padding: 24px 16px; } .header { padding: 28px 20px; } .tabs { padding: 0 16px; } }
   .section { display: none; }
   .section.active { display: block; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .header { padding: 28px 20px 24px; }
+    .header h1 { font-size: 2rem; }
+    .content { padding: 24px 16px; }
+    .tabs { padding: 0 8px; justify-content: flex-start; }
+    .tab-btn { padding: 13px 14px; font-size: 0.78rem; }
+    .section-title { font-size: 1.5rem; }
+    .vocab-grid { grid-template-columns: 1fr; }
+    .dialogue-line { grid-template-columns: 68px 1fr; gap: 8px; }
+    .quiz-options { grid-template-columns: 1fr; }
+    .quiz-card { padding: 20px; }
+    .home-episodes { grid-template-columns: 1fr; }
+    .home-hero-title { font-size: 2rem; }
+    .home-stats { grid-template-columns: repeat(2, 1fr); }
+    .home-features { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.6rem; }
+    .header-eyebrow { font-size: 0.6rem; }
+    .tab-btn { padding: 12px 10px; font-size: 0.72rem; letter-spacing: 0; }
+    .filter-btn { padding: 5px 10px; font-size: 0.65rem; }
+    .dialogue-line { grid-template-columns: 58px 1fr; }
+    .speaker-label { font-size: 0.58rem; padding: 4px 5px; }
+    .tooltip { width: 170px; font-size: 0.73rem; }
+    .score-num { font-size: 3.5rem; }
+    .home-hero-title { font-size: 1.5rem; }
+    .home-stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
 
   .section-header { margin-bottom: 32px; }
   .section-title {
@@ -539,6 +568,193 @@
 
   .hidden { display: none !important; }
 
+  /* ── HOME PAGE ── */
+  .home-hero {
+    background: var(--black);
+    border-radius: 16px;
+    padding: 48px 40px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .home-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(26,86,219,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .home-hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .home-hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.6rem;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .home-hero-title em { font-style: normal; color: #7BAAF7; }
+  .home-hero-desc {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto 28px;
+  }
+  .home-hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+    text-decoration: none;
+  }
+  .home-hero-btn:hover { background: #1447BF; transform: translateY(-1px); }
+
+  .home-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .home-stat {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: border-color 0.15s;
+  }
+  .home-stat:hover { border-color: var(--accent); }
+  .home-stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .home-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .home-section-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+
+  .home-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .home-feature {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .home-feature:hover { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+  .home-feature-icon { font-size: 1.6rem; margin-bottom: 10px; }
+  .home-feature-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .home-feature-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .home-episodes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .episode-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .episode-card:hover { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+  .episode-card.active-ep { border-color: var(--accent); background: var(--accent-light); }
+  .ep-badge {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: var(--surface2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.3;
+  }
+  .episode-card.active-ep .ep-badge { background: var(--accent); color: white; }
+  .ep-info { flex: 1; min-width: 0; }
+  .ep-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ep-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+  .ep-arrow { color: var(--text-muted); font-size: 0.8rem; flex-shrink: 0; }
+  .episode-card.active-ep .ep-arrow { color: var(--accent); }
+  .coming-soon-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    padding: 2px 7px;
+    background: var(--surface2);
+    border-radius: 4px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
   /* ── SEARCH ── */
   .search-wrap {
     position: relative;
@@ -626,21 +842,100 @@
 <div class="header">
   <div class="header-inner">
     <div class="header-eyebrow">Interactive Language Lesson</div>
-    <h1>English with <em>Friends</em></h1>
+    <a href="https://tinyimprove-rgb.github.io/learnenglishwith-friends/" style="text-decoration:none">
+      <h1>English with <em>Friends</em></h1>
+    </a>
     <div class="header-sub">Vocabulary · Slang · Grammar · Culture</div>
     <div class="episode-chip">S01E15 · The One with the WENUS · All Vocab & Slang</div>
   </div>
 </div>
 
 <div class="tabs">
+  <a class="tab-btn" href="https://tinyimprove-rgb.github.io/learnenglishwith-friends/" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;">🏠 Home</a>
   <button class="tab-btn active" onclick="showSection('vocab')">📖 Vocab & Slang</button>
   <button class="tab-btn" onclick="showSection('dialogue')">💬 Annotated Script</button>
   <button class="tab-btn" onclick="showSection('quiz')">🎯 Quiz Me</button>
   <button class="tab-btn" onclick="showSection('culture')">🌎 Culture Notes</button>
-
 </div>
 
 <div class="content">
+
+  <!-- HOME -->
+  <div id="home" class="section">
+    <div class="home-hero">
+      <div class="home-hero-eyebrow">Learn English with TV · Season 1</div>
+      <div class="home-hero-title">English with <em>Friends</em></div>
+      <p class="home-hero-desc">Master real American English through the show you love. Every episode turned into vocabulary cards, annotated scripts, quizzes, and culture notes.</p>
+      <button class="home-hero-btn" onclick="showSection('vocab')">📖 Start Learning →</button>
+    </div>
+
+    <div class="home-stats">
+      <div class="home-stat"><div class="home-stat-num">50+</div><div class="home-stat-label">Vocab Cards</div></div>
+      <div class="home-stat"><div class="home-stat-num">35</div><div class="home-stat-label">Dialogue Lines</div></div>
+      <div class="home-stat"><div class="home-stat-num">12</div><div class="home-stat-label">Quiz Questions</div></div>
+      <div class="home-stat"><div class="home-stat-num">8</div><div class="home-stat-label">Culture Notes</div></div>
+    </div>
+
+    <div class="home-section-title">What's inside</div>
+    <div class="home-features">
+      <div class="home-feature" onclick="showSection('vocab')">
+        <div class="home-feature-icon">📖</div>
+        <div class="home-feature-title">Vocabulary & Slang</div>
+        <div class="home-feature-desc">50+ cards covering every word, idiom, phrasal verb, and joke. Tap to reveal meaning + your own example sentence.</div>
+      </div>
+      <div class="home-feature" onclick="showSection('dialogue')">
+        <div class="home-feature-icon">💬</div>
+        <div class="home-feature-title">Annotated Script</div>
+        <div class="home-feature-desc">Key lines from the episode with hover tooltips. Understand what's really being said — including the jokes.</div>
+      </div>
+      <div class="home-feature" onclick="showSection('quiz')">
+        <div class="home-feature-icon">🎯</div>
+        <div class="home-feature-title">Quiz Yourself</div>
+        <div class="home-feature-desc">Multiple choice and fill-in-the-blank questions to test your memory. Score tracked. Shuffle on every attempt.</div>
+      </div>
+      <div class="home-feature" onclick="showSection('culture')">
+        <div class="home-feature-icon">🌎</div>
+        <div class="home-feature-title">Culture Notes</div>
+        <div class="home-feature-desc">MLK, Cheech & Chong, James Michener — understand every cultural reference the show makes.</div>
+      </div>
+    </div>
+
+    <div class="home-section-title" style="margin-top:8px">Season 1 Episodes</div>
+    <div class="home-episodes">
+      <div class="episode-card active-ep" onclick="showSection('vocab')">
+        <div class="ep-badge">S01<br>E15</div>
+        <div class="ep-info">
+          <div class="ep-title">The One with the WENUS</div>
+          <div class="ep-meta">50+ words · Available now</div>
+        </div>
+        <div class="ep-arrow">▶</div>
+      </div>
+      <div class="episode-card" style="opacity:0.6;cursor:default">
+        <div class="ep-badge">S01<br>E01</div>
+        <div class="ep-info">
+          <div class="ep-title">The One Where Monica Gets a Roommate</div>
+          <div class="ep-meta"><span class="coming-soon-badge">Coming soon</span></div>
+        </div>
+        <div class="ep-arrow">→</div>
+      </div>
+      <div class="episode-card" style="opacity:0.6;cursor:default">
+        <div class="ep-badge">S01<br>E06</div>
+        <div class="ep-info">
+          <div class="ep-title">The One with the Butt</div>
+          <div class="ep-meta"><span class="coming-soon-badge">Coming soon</span></div>
+        </div>
+        <div class="ep-arrow">→</div>
+      </div>
+      <div class="episode-card" style="opacity:0.6;cursor:default">
+        <div class="ep-badge">S01<br>E24</div>
+        <div class="ep-info">
+          <div class="ep-title">The One Where Rachel Finds Out</div>
+          <div class="ep-meta"><span class="coming-soon-badge">Coming soon</span></div>
+        </div>
+        <div class="ep-arrow">→</div>
+      </div>
+    </div>
+  </div>
 
   <div id="vocab" class="section active">
     <div class="section-header">
@@ -1040,10 +1335,12 @@ function renderQuizScore() {
 // ── TABS ──
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn[onclick]').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   const tabs = ['vocab','dialogue','quiz','culture'];
-  document.querySelectorAll('.tab-btn')[tabs.indexOf(id)].classList.add('active');
+  const btns = document.querySelectorAll('.tab-btn[onclick]');
+  const idx = tabs.indexOf(id);
+  if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
   if (id === 'quiz' && quizState.current === 0 && quizState.score === 0) startQuiz();
 }
 
