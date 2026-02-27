@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Season 1</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f6f9;
+    padding: 40px;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    max-width: 800px;
+    margin: auto;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2563eb;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #1e40af;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Friends - Season 1</h1>
+
+<div class="container" id="buttons"></div>
+
+<script>
+// 🔵 اینجا فقط لینک‌ها رو تغییر بده
+const links = {
+    S01E01: "s01e01/index.html",
+    S01E02: "s01e02/index.html",
+    S01E03: "s01e03/index.html",
+    S01E04: "s01e04/index.html",
+    S01E05: "s01e05/index.html",
+    S01E06: "s01e06/index.html",
+    S01E07: "s01e07/index.html",
+    S01E08: "s01e08/index.html",
+    S01E09: "s01e09/index.html",
+    S01E10: "s01e10/index.html",
+    S01E11: "s01e11/index.html",
+    S01E12: "s01e12/index.html",
+    S01E13: "s01e13/index.html",
+    S01E14: "s01e14/index.html",
+    S01E15: "s01e15/index.html",
+    S01E16: "s01e16/index.html",
+    S01E17: "s01e17/index.html",
+    S01E18: "s01e18/index.html",
+    S01E19: "s01e19/index.html",
+    S01E20: "s01e20/index.html",
+    S01E21: "s01e21/index.html",
+    S01E22: "s01e22/index.html",
+};
+
+// 🔵 دکمه‌ها اتوماتیک ساخته میشن
+const container = document.getElementById("buttons");
+
+for (let episode in links) {
+    const btn = document.createElement("button");
+    btn.innerText = episode;
+    btn.onclick = () => {
+        window.location.href = links[episode];
+    };
+    container.appendChild(btn);
+}
+</script>
+
+</body>
+</html>
