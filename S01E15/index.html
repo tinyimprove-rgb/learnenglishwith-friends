@@ -32,21 +32,21 @@ body{font-family:'Roboto',sans-serif;background:var(--md-bg);color:var(--md-on-s
 
 /* ── TOP APP BAR ── */
 .top-bar{background:var(--md-surface);border-bottom:1px solid var(--md-outline);position:sticky;top:0;z-index:200;box-shadow:var(--el1)}
-.top-bar-inner{max-width:1040px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:8px;height:64px}
+.top-bar-inner{max-width:1040px;margin:0 auto;padding:0 16px;display:flex;flex-direction:column;align-items:center}
+.top-bar-title-row{width:100%;display:flex;align-items:center;justify-content:center;padding:10px 0 6px;position:relative}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.logo-icon{font-size:1.4rem;line-height:1}
+.logo-icon{font-size:1.35rem;line-height:1}
 .logo-text{font-family:'Google Sans Display',sans-serif;font-size:1.1rem;font-weight:500;letter-spacing:-.2px}
 .logo-text .b{color:#4285F4}.logo-text .r{color:#EA4335}.logo-text .y{color:#FBBC04}.logo-text .g{color:#34A853}.logo-text .k{color:var(--md-on-surface)}
-.bar-divider{width:1px;height:24px;background:var(--md-outline);margin:0 6px;flex-shrink:0}
-.bar-subtitle{font-family:'Google Sans',sans-serif;font-size:0.875rem;color:var(--md-on-surface-variant);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.top-nav{display:flex;gap:0;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.bar-divider{width:1px;height:16px;background:var(--md-outline);margin:0 8px;flex-shrink:0}
+.bar-subtitle{font-family:'Google Sans',sans-serif;font-size:0.8rem;color:var(--md-on-surface-variant);white-space:nowrap}
+.top-nav{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--md-outline);width:100%}
 .top-nav::-webkit-scrollbar{display:none}
-.nav-btn{display:inline-flex;align-items:center;gap:6px;padding:0 16px;height:64px;border:none;background:none;cursor:pointer;font-family:'Google Sans',sans-serif;font-size:.875rem;font-weight:500;color:var(--md-on-surface-variant);white-space:nowrap;text-decoration:none;border-bottom:3px solid transparent;margin-bottom:-1px;transition:color .15s;position:relative}
-.nav-btn::before{content:'';position:absolute;inset:8px 4px;border-radius:50px;background:transparent;transition:background .15s}
+.nav-btn{display:inline-flex;align-items:center;gap:6px;padding:0 14px;height:44px;border:none;background:none;cursor:pointer;font-family:'Google Sans',sans-serif;font-size:.8125rem;font-weight:500;color:var(--md-on-surface-variant);white-space:nowrap;text-decoration:none;border-bottom:3px solid transparent;margin-bottom:-1px;transition:color .15s;position:relative;flex:1;justify-content:center}
+.nav-btn::before{content:'';position:absolute;inset:4px 4px;border-radius:50px;background:transparent;transition:background .15s}
 .nav-btn:hover::before{background:rgba(26,115,232,.08)}
 .nav-btn:hover{color:var(--md-primary)}
 .nav-btn.active{color:var(--md-primary);border-bottom-color:var(--md-primary)}
-
 /* Review badge on nav button */
 .rev-badge{display:inline-flex;align-items:center;justify-content:center;background:var(--md-secondary);color:#fff;border-radius:50px;font-size:.65rem;font-weight:700;min-width:18px;height:18px;padding:0 5px;font-family:'Google Sans',sans-serif;transition:transform .2s;display:none}
 .rev-badge.show{display:inline-flex}
@@ -261,19 +261,21 @@ body{font-family:'Roboto',sans-serif;background:var(--md-bg);color:var(--md-on-s
 
 <div class="top-bar">
   <div class="top-bar-inner">
-    <a class="logo" href="https://tinyimprove-rgb.github.io/learnenglishwith-friends/">
-      <div class="logo-icon">📺</div>
-      <div class="logo-text"><span class="b">E</span><span class="r">n</span><span class="y">g</span><span class="g">l</span><span class="k">ish with Friends</span></div>
-    </a>
-    <div class="bar-divider"></div>
-    <div class="bar-subtitle">The One with the WENUS · S01E15</div>
+    <div class="top-bar-title-row">
+      <a class="logo" href="https://tinyimprove-rgb.github.io/learnenglishwith-friends/">
+        <div class="logo-icon">📺</div>
+        <div class="logo-text"><span class="b">E</span><span class="r">n</span><span class="y">g</span><span class="g">l</span><span class="k">ish with Friends</span></div>
+      </a>
+      <div class="bar-divider"></div>
+      <div class="bar-subtitle">The One with the WENUS · S01E15</div>
+    </div>
     <nav class="top-nav">
+      <a class="nav-btn" href="https://tinyimprove-rgb.github.io/learnenglishwith-friends/"><span class="ni">🏠</span> Home</a>
       <button class="nav-btn active" onclick="showSec('vocab')"><span class="ni">📖</span> Vocab</button>
       <button class="nav-btn" onclick="showSec('dialogue')"><span class="ni">💬</span> Script</button>
       <button class="nav-btn" onclick="showSec('quiz')"><span class="ni">🎯</span> Quiz</button>
       <button class="nav-btn" onclick="showSec('culture')"><span class="ni">🌎</span> Culture</button>
       <button class="nav-btn" id="reviewNavBtn" onclick="showSec('review')"><span class="ni">★</span> Review <span class="rev-badge" id="revBadge">0</span></button>
-      <a class="nav-btn" href="https://tinyimprove-rgb.github.io/learnenglishwith-friends/"><span class="ni">🏠</span> Home</a>
     </nav>
   </div>
 </div>
