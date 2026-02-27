@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Friends — Season 1</title>
+<title>Friends — All Seasons</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,7 +12,7 @@
     --blue: #1D4ED8;
     --blue-hover: #1E40AF;
     --gray: #6B7280;
-    --light: #F3F4F6;
+    --light: #F9FAFB;
     --border: #E5E7EB;
     --text: #111827;
   }
@@ -22,7 +22,7 @@
     font-family: 'Inter', sans-serif;
     color: var(--text);
     min-height: 100vh;
-    padding: 80px 32px 100px;
+    padding: 64px 32px 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,60 +31,127 @@
   /* ── HEADER ── */
   .header {
     text-align: center;
-    margin-bottom: 64px;
+    margin-bottom: 48px;
+    animation: rise 0.7s cubic-bezier(0.22,1,0.36,1) both;
   }
 
   .title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(5rem, 16vw, 11rem);
+    font-size: clamp(4.5rem, 14vw, 10rem);
     letter-spacing: 0.04em;
     line-height: 1;
     color: var(--text);
-    opacity: 0;
-    transform: translateY(30px);
-    animation: rise 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;
   }
 
-  .title span {
-    color: var(--blue);
-  }
+  .title span { color: var(--blue); }
 
   .meta {
-    margin-top: 14px;
-    font-size: 0.72rem;
+    margin-top: 12px;
+    font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--gray);
-    opacity: 0;
-    animation: rise 0.6s ease 0.35s forwards;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;
+    gap: 12px;
   }
 
   .meta-dot {
-    width: 3px;
-    height: 3px;
+    width: 3px; height: 3px;
     border-radius: 50%;
     background: var(--border);
-    display: inline-block;
   }
 
   .rule {
-    width: 48px;
-    height: 2px;
+    width: 40px; height: 2px;
     background: var(--blue);
-    margin: 20px auto 0;
-    opacity: 0;
-    animation: rise 0.5s ease 0.5s forwards;
+    margin: 16px auto 0;
+  }
+
+  /* ── SEASON TABS ── */
+  .tabs-wrap {
+    width: 100%;
+    max-width: 860px;
+    margin-bottom: 36px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    animation: rise 0.6s ease 0.2s both;
+  }
+  .tabs-wrap::-webkit-scrollbar { display: none; }
+
+  .tabs {
+    display: flex;
+    gap: 6px;
+    width: max-content;
+    min-width: 100%;
+    justify-content: center;
+    padding-bottom: 4px;
+  }
+
+  .tab {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+  }
+
+  .tab:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .tab.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+
+  /* ── SEASON INFO BAR ── */
+  .season-bar {
+    width: 100%;
+    max-width: 860px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    animation: rise 0.4s ease both;
+  }
+
+  .season-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+
+  .ep-count-badge {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px 14px;
   }
 
   /* ── GRID ── */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 10px;
     max-width: 860px;
     width: 100%;
@@ -97,7 +164,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 22px 12px 18px;
+    padding: 20px 10px 16px;
     border-radius: 12px;
     border: 1.5px solid var(--border);
     background: #fff;
@@ -108,25 +175,24 @@
       transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
       box-shadow 0.18s ease;
     opacity: 0;
-    animation: cardIn 0.4s ease both;
+    animation: cardIn 0.35s ease both;
   }
 
   .ep-card:hover {
     background: var(--blue);
     border-color: var(--blue);
     transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(29,78,216,0.18);
+    box-shadow: 0 10px 24px rgba(29,78,216,0.18);
   }
 
   .ep-card:active {
     transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(29,78,216,0.15);
   }
 
   .ep-num {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    letter-spacing: 0.05em;
+    font-size: 1.9rem;
+    letter-spacing: 0.04em;
     color: var(--text);
     line-height: 1;
     transition: color 0.18s ease;
@@ -135,12 +201,12 @@
   .ep-card:hover .ep-num { color: #fff; }
 
   .ep-tag {
-    font-size: 0.58rem;
+    font-size: 0.57rem;
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--gray);
-    margin-top: 6px;
+    margin-top: 5px;
     transition: color 0.18s ease;
   }
 
@@ -148,14 +214,12 @@
 
   /* ── FOOTER ── */
   .footer {
-    margin-top: 64px;
-    font-size: 0.65rem;
+    margin-top: 56px;
+    font-size: 0.62rem;
     font-weight: 400;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--border);
-    opacity: 0;
-    animation: rise 0.5s ease 1.2s forwards;
   }
 
   /* ── ANIMATIONS ── */
@@ -165,15 +229,16 @@
   }
 
   @keyframes cardIn {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 480px) {
-    body { padding: 56px 16px 72px; }
-    .grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .ep-num { font-size: 1.6rem; }
+    body { padding: 44px 14px 64px; }
+    .grid { grid-template-columns: repeat(4, 1fr); gap: 7px; }
+    .ep-num { font-size: 1.5rem; }
+    .tabs { justify-content: flex-start; }
   }
 </style>
 </head>
@@ -182,57 +247,98 @@
   <header class="header">
     <div class="title">FRIE<span>N</span>DS</div>
     <div class="meta">
-      <span>Season One</span>
+      <span>Complete Series</span>
       <span class="meta-dot"></span>
-      <span>22 Episodes</span>
+      <span>10 Seasons</span>
       <span class="meta-dot"></span>
-      <span>NBC · 1994</span>
+      <span>NBC · 1994–2004</span>
     </div>
     <div class="rule"></div>
   </header>
+
+  <div class="tabs-wrap">
+    <div class="tabs" id="tabs"></div>
+  </div>
+
+  <div class="season-bar">
+    <span class="season-label" id="season-label">Season 1</span>
+    <span class="ep-count-badge" id="ep-count">24 Episodes</span>
+  </div>
 
   <div class="grid" id="grid"></div>
 
   <p class="footer">Select an episode to watch</p>
 
 <script>
-const links = {
-  S01E01: "s01e01/index.html",
-  S01E02: "s01e02/index.html",
-  S01E03: "s01e03/index.html",
-  S01E04: "s01e04/index.html",
-  S01E05: "s01e05/index.html",
-  S01E06: "s01e06/index.html",
-  S01E07: "s01e07/index.html",
-  S01E08: "s01e08/index.html",
-  S01E09: "s01e09/index.html",
-  S01E10: "s01e10/index.html",
-  S01E11: "s01e11/index.html",
-  S01E12: "s01e12/index.html",
-  S01E13: "S01E13/index.html",
-  S01E14: "s01e14/index.html",
-  S01E15: "S01E15/index.html",
-  S01E16: "s01e16/index.html",
-  S01E17: "s01e17/index.html",
-  S01E18: "s01e18/index.html",
-  S01E19: "s01e19/index.html",
-  S01E20: "s01e20/index.html",
-  S01E21: "s01e21/index.html",
-  S01E22: "s01e22/index.html",
-};
+  const seasons = [
+    { n: 1,  eps: 24 },
+    { n: 2,  eps: 24 },
+    { n: 3,  eps: 25 },
+    { n: 4,  eps: 24 },
+    { n: 5,  eps: 24 },
+    { n: 6,  eps: 25 },
+    { n: 7,  eps: 24 },
+    { n: 8,  eps: 24 },
+    { n: 9,  eps: 24 },
+    { n: 10, eps: 18 },
+  ];
 
-const grid = document.getElementById("grid");
-let i = 0;
-for (const [ep, href] of Object.entries(links)) {
-  const num = ep.replace("S01E", "");
-  const card = document.createElement("a");
-  card.className = "ep-card";
-  card.href = href;
-  card.style.animationDelay = `${0.55 + i * 0.03}s`;
-  card.innerHTML = `<div class="ep-num">${num}</div><div class="ep-tag">Episode</div>`;
-  grid.appendChild(card);
-  i++;
-}
+  const tabsEl    = document.getElementById('tabs');
+  const gridEl    = document.getElementById('grid');
+  const labelEl   = document.getElementById('season-label');
+  const countEl   = document.getElementById('ep-count');
+
+  let current = 1;
+
+  // Build tabs
+  seasons.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (s.n === 1 ? ' active' : '');
+    btn.textContent = `S${String(s.n).padStart(2,'0')}`;
+    btn.dataset.season = s.n;
+    btn.addEventListener('click', () => switchSeason(s.n));
+    tabsEl.appendChild(btn);
+  });
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function buildEpPath(s, e) {
+    return `s${pad(s)}e${pad(e)}/index.html`;
+  }
+
+  function switchSeason(n) {
+    if (n === current) return;
+    current = n;
+
+    // update tabs
+    tabsEl.querySelectorAll('.tab').forEach(t => {
+      t.classList.toggle('active', Number(t.dataset.season) === n);
+    });
+
+    // update label
+    const season = seasons.find(s => s.n === n);
+    labelEl.textContent = `Season ${n}`;
+    countEl.textContent = `${season.eps} Episodes`;
+
+    // rebuild grid with animation
+    renderGrid(season);
+  }
+
+  function renderGrid(season) {
+    gridEl.innerHTML = '';
+    for (let e = 1; e <= season.eps; e++) {
+      const card = document.createElement('a');
+      card.className = 'ep-card';
+      card.href = buildEpPath(season.n, e);
+      card.style.animationDelay = `${(e - 1) * 25}ms`;
+      const epCode = `S${pad(season.n)}E${pad(e)}`;
+      card.innerHTML = `<div class="ep-num">${epCode}</div><div class="ep-tag">Episode</div>`;
+      gridEl.appendChild(card);
+    }
+  }
+
+  // Initial render
+  renderGrid(seasons[0]);
 </script>
 </body>
 </html>
