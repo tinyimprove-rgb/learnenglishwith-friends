@@ -3,41 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Season 1</title>
+<title>Friends - Season 1</title>
+
+<!-- فونت مدرن گوگل -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+/* ===== بدنه ===== */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     text-align: center;
-    background-color: #f4f6f9;
-    padding: 40px;
+    background: linear-gradient(to bottom, #e0e7ff, #f4f6f9);
+    padding: 50px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* ===== تیتر ===== */
 h1 {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #1e40af;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.1);
 }
 
+/* ===== شبکه دکمه‌ها ===== */
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 15px;
-    max-width: 800px;
-    margin: auto;
+    gap: 20px;
+    max-width: 900px;
+    width: 100%;
 }
 
+/* ===== دکمه‌ها ===== */
 button {
-    padding: 12px;
+    padding: 15px;
     border: none;
-    border-radius: 8px;
-    background-color: #2563eb;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
     color: white;
     font-weight: bold;
+    font-size: 1rem;
     cursor: pointer;
-    transition: 0.2s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #1e40af;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    background: linear-gradient(135deg, #1e40af, #2563eb);
+}
+
+button:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+}
+
+/* ===== واکنش‌گرا ===== */
+@media (max-width: 500px) {
+    h1 {
+        font-size: 2rem;
+    }
+    button {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
 }
 </style>
 </head>
@@ -49,7 +83,7 @@ button:hover {
 <div class="container" id="buttons"></div>
 
 <script>
-// 🔵 اینجا فقط لینک‌ها رو تغییر بده
+// 🔵 لینک‌ها
 const links = {
     S01E01: "s01e01/index.html",
     S01E02: "s01e02/index.html",
@@ -75,21 +109,16 @@ const links = {
     S01E22: "s01e22/index.html",
 };
 
-// 🔵 دکمه‌ها اتوماتیک ساخته میشن
+// 🔵 ساخت دکمه‌ها
 const container = document.getElementById("buttons");
 
 for (let episode in links) {
     const btn = document.createElement("button");
     btn.innerText = episode;
-    btn.onclick = () => {
-        window.location.href = links[episode];
-    };
+    btn.onclick = () => window.location.href = links[episode];
     container.appendChild(btn);
 }
 </script>
 
 </body>
-
 </html>
-
-
