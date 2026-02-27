@@ -64,6 +64,7 @@
     margin: 0 auto;
     position: relative;
     z-index: 1;
+    text-align: center;
   }
   .header-eyebrow {
     font-family: 'DM Mono', monospace;
@@ -112,6 +113,7 @@
     border-bottom: 1px solid var(--border);
     padding: 0 48px;
     display: flex;
+    justify-content: center;
     gap: 0;
     overflow-x: auto;
     position: sticky;
@@ -537,6 +539,80 @@
 
   .hidden { display: none !important; }
 
+  /* ── SEARCH ── */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    font-size: 1rem;
+  }
+  .search-input {
+    width: 100%;
+    padding: 11px 40px 11px 40px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+  }
+  .search-input::placeholder { color: var(--text-muted); }
+  .search-clear {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1;
+    padding: 2px;
+    display: none;
+    border-radius: 50%;
+    transition: color 0.15s;
+  }
+  .search-clear:hover { color: var(--text); }
+  .search-clear.visible { display: block; }
+  .search-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    min-height: 18px;
+  }
+  .search-count span { color: var(--accent); font-weight: 500; }
+  .search-highlight {
+    background: rgba(26,86,219,0.15);
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+  .no-results {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-muted);
+    display: none;
+  }
+  .no-results.show { display: block; }
+  .no-results-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .no-results p { font-size: 0.9rem; line-height: 1.6; }
+  .no-results strong { color: var(--text); }
+
   /* divider */
   .divider {
     height: 1px;
@@ -571,19 +647,29 @@
       <h2 class="section-title">Vocabulary & Slang</h2>
       <p class="section-subtitle">Every key word, phrase, slang, and joke from this episode. Tap any card to reveal the full meaning + a new example sentence you can use yourself.</p>
     </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search words, meanings, examples..." oninput="searchVocab(this.value)">
+      <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+    </div>
+    <div class="search-count" id="searchCount"></div>
     <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterVocab('all', this)">All</button>
-      <button class="filter-btn" onclick="filterVocab('slang', this)">🔥 Slang</button>
-      <button class="filter-btn" onclick="filterVocab('phrase', this)">💬 Phrases</button>
-      <button class="filter-btn" onclick="filterVocab('idiom', this)">🎭 Idioms</button>
-      <button class="filter-btn" onclick="filterVocab('vocab', this)">📚 Vocabulary</button>
-      <button class="filter-btn" onclick="filterVocab('humor', this)">😂 Comedy</button>
-      <button class="filter-btn" onclick="filterVocab('phrasal', this)">🔗 Phrasal Verbs</button>
-      <button class="filter-btn" onclick="filterVocab('expression', this)">💡 Expressions</button>
-      <button class="filter-btn" onclick="filterVocab('romantic', this)">❤️ Romantic</button>
-      <button class="filter-btn" onclick="filterVocab('business', this)">💼 Business</button>
+      <button class="filter-btn active" data-tag="all" onclick="filterVocab('all', this)">All</button>
+      <button class="filter-btn" data-tag="slang" onclick="filterVocab('slang', this)">🔥 Slang</button>
+      <button class="filter-btn" data-tag="phrase" onclick="filterVocab('phrase', this)">💬 Phrases</button>
+      <button class="filter-btn" data-tag="idiom" onclick="filterVocab('idiom', this)">🎭 Idioms</button>
+      <button class="filter-btn" data-tag="vocab" onclick="filterVocab('vocab', this)">📚 Vocabulary</button>
+      <button class="filter-btn" data-tag="humor" onclick="filterVocab('humor', this)">😂 Comedy</button>
+      <button class="filter-btn" data-tag="phrasal" onclick="filterVocab('phrasal', this)">🔗 Phrasal Verbs</button>
+      <button class="filter-btn" data-tag="expression" onclick="filterVocab('expression', this)">💡 Expressions</button>
+      <button class="filter-btn" data-tag="romantic" onclick="filterVocab('romantic', this)">❤️ Romantic</button>
+      <button class="filter-btn" data-tag="business" onclick="filterVocab('business', this)">💼 Business</button>
     </div>
     <div class="vocab-grid" id="vocabGrid"></div>
+    <div class="no-results" id="noResults">
+      <div class="no-results-icon">🔎</div>
+      <p>No results for <strong id="noResultsQuery"></strong><br>Try a different word or clear the search.</p>
+    </div>
   </div>
 
   <div id="dialogue" class="section">
@@ -753,9 +839,86 @@ function toggleCard(card) { card.classList.toggle('revealed'); }
 function filterVocab(tag, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('.vocab-card').forEach(card => {
-    card.classList.toggle('hidden', tag !== 'all' && card.dataset.tag !== tag);
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  applyFilters(tag, query);
+}
+
+function searchVocab(query) {
+  const q = query.trim().toLowerCase();
+  const clearBtn = document.getElementById('searchClear');
+  clearBtn.classList.toggle('visible', q.length > 0);
+  // reset filter to 'all' when typing
+  const activeTag = document.querySelector('.filter-btn.active')?.dataset?.tag || 'all';
+  applyFilters(activeTag, q);
+}
+
+function applyFilters(tag, query) {
+  const cards = document.querySelectorAll('.vocab-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const matchTag = tag === 'all' || card.dataset.tag === tag;
+    let matchSearch = true;
+
+    if (query) {
+      const word = card.querySelector('.vocab-word')?.textContent.toLowerCase() || '';
+      const context = card.querySelector('.vocab-context')?.textContent.toLowerCase() || '';
+      const meaning = card.querySelector('.vocab-meaning')?.textContent.toLowerCase() || '';
+      matchSearch = word.includes(query) || context.includes(query) || meaning.includes(query);
+
+      // highlight matching text in word
+      const wordEl = card.querySelector('.vocab-word');
+      if (wordEl) {
+        const original = wordEl.dataset.original || wordEl.textContent;
+        wordEl.dataset.original = original;
+        if (matchSearch) {
+          const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+          wordEl.innerHTML = original.replace(re, '<mark class="search-highlight">$1</mark>');
+        } else {
+          wordEl.textContent = original;
+        }
+      }
+    } else {
+      // clear highlights
+      const wordEl = card.querySelector('.vocab-word');
+      if (wordEl && wordEl.dataset.original) {
+        wordEl.textContent = wordEl.dataset.original;
+      }
+    }
+
+    const show = matchTag && matchSearch;
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
   });
+
+  // update count
+  const countEl = document.getElementById('searchCount');
+  const noResults = document.getElementById('noResults');
+  const noResultsQuery = document.getElementById('noResultsQuery');
+
+  if (query) {
+    countEl.innerHTML = `<span>${visible}</span> result${visible !== 1 ? 's' : ''} for "<span>${query}</span>"`;
+  } else {
+    countEl.innerHTML = '';
+  }
+
+  if (visible === 0) {
+    noResults.classList.add('show');
+    noResultsQuery.textContent = `"${query}"`;
+  } else {
+    noResults.classList.remove('show');
+  }
+}
+
+function clearSearch() {
+  const input = document.getElementById('searchInput');
+  input.value = '';
+  document.getElementById('searchClear').classList.remove('visible');
+  document.getElementById('searchCount').innerHTML = '';
+  document.getElementById('noResults').classList.remove('show');
+  const activeTag = document.querySelector('.filter-btn.active')?.dataset?.tag || 'all';
+  applyFilters(activeTag, '');
+  input.focus();
 }
 
 // ── RENDER DIALOGUE ──
